@@ -229,35 +229,35 @@
         @keyframes pulse-dot { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
         @keyframes pulse-dot-hover { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); } 70% { transform: scale(1.3); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN --- */
+        /* --- POSISI KARTU & KALKULASI PANAH (PIXEL-PERFECT, NO STACKING!) --- */
         
-        /* [DIKUNCI] Segitiga */
+        /* [DIKUNCI] Segitiga (Aman) */
         .pos-segitiga { top: 90px; left: 20px; }
         .pos-segitiga .css-arrow { left: 100%; width: 310px; transform: rotate(49deg); } 
 
-        /* [DIKUNCI] Bintang */
+        /* [DIKUNCI] Bintang (Aman) */
         .pos-bintang { top: 90px; right: 20px; }
         .pos-bintang .css-arrow { left: 0; width: 330px; transform: rotate(148deg); } 
 
-        /* [DIKUNCI] Tongkat */
+        /* [DIKUNCI] Tongkat (Aman) */
         .pos-tongkat { top: 380px; right: 10px; }
         .pos-tongkat .css-arrow { left: 0; width: 295px; transform: rotate(176deg); } 
 
-        /* [DIKUNCI] Angka 2014 */
+        /* [DIKUNCI] Angka 2014 (Aman) */
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
         .pos-2014 .css-arrow { left: 50%; top: 100%; width: 385px; transform: rotate(90deg); } 
 
-        /* [DIPERBAIKI FINAL] Molar: Dikembalikan presisi agar mengarah murni ke akar gigi putih */
-        .pos-molar { top: 660px; left: 20px; }
-        .pos-molar .css-arrow { left: 100%; width: 385px; transform: rotate(-39deg); } 
-
-        /* [DIPERBAIKI FINAL] Phinisi: Sudut dinaikkan lagi agar mendarat persis di area merah lambung kapal */
+        /* [SUDAH DIPERBAIKI] Phinisi: Sudut diubah menjadi 16 derajat agar menunjuk sempurna ke sisi lambung merah, bukan ke titik kumpul tengah */
         .pos-phinisi { top: 380px; left: 10px; }
-        .pos-phinisi .css-arrow { left: 100%; width: 270px; transform: rotate(10deg); } 
+        .pos-phinisi .css-arrow { left: 100%; width: 270px; transform: rotate(16deg); } 
 
-        /* [DIPERBAIKI FINAL] Ular: Ujung panah ditarik drastis ke atas menuju tengah lilitan ular di tongkat emas */
+        /* [SUDAH DIPERBAIKI] Molar: Sudut ditajamkan ke atas (-50deg) & diperpendek agar memisahkan diri dari tumpukan dan menusuk pas ke akar gigi kiri */
+        .pos-molar { top: 660px; left: 20px; }
+        .pos-molar .css-arrow { left: 100%; width: 330px; transform: rotate(-50deg); } 
+
+        /* [SUDAH DIPERBAIKI] Ular: Sudut dinaikkan tajam ke atas (231deg) & ditarik memisah dari tumpukan agar menembak persis ke badan ular hitam di tiang */
         .pos-ular { top: 660px; right: 20px; }
-        .pos-ular .css-arrow { left: 0; width: 405px; transform: rotate(224deg); } 
+        .pos-ular .css-arrow { left: 0; width: 395px; transform: rotate(231deg); } 
 
 
         /* --- TATA LETAK MOBILE --- */
