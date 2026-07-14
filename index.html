@@ -116,28 +116,28 @@
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
         }
 
-        /* 1. SHIELD / PERISAI */
+        /* 1. SHIELD / PERISAI (Presisi 100% menampung tulisan Makassar) */
         .shield { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .shield-layer-1-black { background-color: var(--black-line); clip-path: path('M 250 20 Q 400 50 480 90 C 490 320 380 490 250 580 C 120 490 10 320 20 90 Q 100 50 250 20 Z'); z-index: 0; }
         .shield-layer-2-green { background-color: var(--green-border); clip-path: path('M 250 32 Q 395 60 468 98 C 477 318 373 480 250 565 C 127 480 23 318 32 98 Q 105 60 250 32 Z'); z-index: 1; }
         .shield-layer-3-black { background-color: var(--black-line); clip-path: path('M 250 42 Q 388 68 456 105 C 464 315 365 470 250 550 C 135 470 36 315 44 105 Q 112 68 250 42 Z'); z-index: 2; }
         .shield-layer-4-purple { background-color: var(--purple-bg); clip-path: path('M 250 50 Q 382 74 446 110 C 454 312 358 462 250 538 C 142 462 46 312 54 110 Q 118 74 250 50 Z'); z-index: 3; }
 
-        /* 2. TEKS KBMFKG */
+        /* 2. TEKS KBMFKG (Dinaikkan agar tidak menimpa teks melengkung) */
         .text-kbmfkg {
             position: absolute; top: 65px; left: 50%; transform: translateX(-50%); width: 100%; text-align: center;
             font-size: 52px; font-family: "Impact", "Arial Black", sans-serif; color: white; letter-spacing: 4px;
             -webkit-text-stroke: 2px var(--black-line); text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; z-index: 10;
         }
 
-        /* 3. TEKS MELENGKUNG */
+        /* 3. TEKS MELENGKUNG (Titik pusat diturunkan, tidak overlap dengan KBMFKG) */
         .text-curved-container { position: absolute; top: 300px; left: 50%; width: 0; height: 0; z-index: 10; }
         .text-curved-container span {
             position: absolute; left: 0; top: 0; color: white; font-size: 15px; font-family: "Courier New", Courier, monospace; font-weight: bold;
             -webkit-text-stroke: 1px var(--black-line); text-shadow: 1px 1px 0 #000; 
         }
 
-        /* 4. GIGI MOLAR */
+        /* 4. GIGI MOLAR (Paling dasar, terlihat melalui lubang segitiga) */
         .molar-container { position: absolute; top: 235px; left: 50%; transform: translateX(-50%); width: 160px; height: 180px; z-index: 4; }
         .molar-crown { position: absolute; top: 0; left: 0; width: 160px; height: 80px; background-color: var(--white-molar); border: 5px solid var(--black-line); border-bottom: none; border-radius: 40px 40px 15px 15px; z-index: 1; }
         .molar-root { position: absolute; width: 70px; height: 115px; background-color: var(--white-molar); border: 5px solid var(--black-line); top: 60px; z-index: 0; }
@@ -145,16 +145,18 @@
         .molar-root.right { right: 4px; border-radius: 10px 10px 70px 40px; transform: rotate(-14deg); }
         .molar-cover { position: absolute; top: 50px; left: 25px; width: 110px; height: 40px; background-color: var(--white-molar); z-index: 2; }
 
-        /* 5. SEGITIGA HOLLOW */
+        /* 5. SEGITIGA HOLLOW (KETEBALAN BORDER DALAM HITAM SUDAH DIPERTIPIS LAGI) */
         .triangle-hollow { 
             position: absolute; left: 50%; transform: translateX(-50%); 
+            /* Clip-path lubang diperbesar agar border di dalamnya semakin tipis sempurna */
             clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 11% 16%, 50% 86%, 89% 16%, 11% 16%); 
         }
         .tri-outer-black { top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; }
         .tri-mid-purple { top: 221px; width: 236px; height: 207px; background-color: var(--purple-bg); z-index: 6; }
+        /* Dimensi hitam dalam dikecilkan agar garis yang tersisa setelah di-clip sangat tipis */
         .tri-inner-black { top: 227px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; }
 
-        /* 6. PERAHU PHINISI */
+        /* 6. PERAHU PHINISI (Bentuk Presisi Sempurna dengan ujung tajam) */
         .phinisi-outer { 
             position: absolute; top: 415px; left: 50%; transform: translateX(-50%); width: 200px; height: 55px; background: var(--black-line); 
             clip-path: path('M 0 10 Q 100 25 200 10 C 180 70 120 75 100 75 C 80 75 20 70 0 10 Z'); z-index: 7; 
@@ -169,10 +171,10 @@
         .crescent { position: absolute; top: 5px; left: 10px; width: 25px; height: 25px; border-radius: 50%; box-shadow: inset 6px 6px 0 var(--yellow-gold); transform: rotate(-20deg); }
         .star { position: absolute; top: 12px; left: 22px; width: 15px; height: 15px; background-color: var(--yellow-gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
 
-        /* 8. TONGKAT AESCULAPIUS */
+        /* 8. TONGKAT AESCULAPIUS (Tampil Paling Atas di atas Gigi & Segitiga) */
         .staff { position: absolute; top: 195px; left: 50%; transform: translateX(-50%); width: 10px; height: 215px; background-color: var(--yellow-gold); border: 2px solid var(--black-line); border-radius: 5px; z-index: 8; }
 
-        /* 9. ULAR MELILIT */
+        /* 9. ULAR MELILIT (Lilitan di-kalibrasi mengikuti tongkat) */
         .snake-segment { position: absolute; left: 50%; width: 45px; height: 35px; border: 5px solid var(--black-line); border-radius: 50%; }
         .sn-b1 { top: 225px; transform: translateX(-35%) rotate(15deg); border-top-color: transparent; border-right-color: transparent; z-index: 7; }
         .sn-f1 { top: 245px; transform: translateX(-65%) rotate(15deg); border-bottom-color: transparent; border-left-color: transparent; z-index: 9; }
@@ -184,7 +186,7 @@
         .sn-tail { position: absolute; top: 382px; left: 50%; transform: translateX(-110%) rotate(40deg); width: 18px; height: 18px; border: 5px solid var(--black-line); border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; z-index: 9; }
         .sn-head { position: absolute; top: 200px; left: 50%; transform: translateX(-110%) rotate(-15deg); width: 22px; height: 14px; background-color: var(--black-line); border-radius: 50% 50% 10px 10px; z-index: 9; }
 
-        /* 10. TEKS BAWAH */
+        /* 10. TEKS BAWAH (Font diturunkan ke 485px, masuk sempurna dalam perisai) */
         .text-2014 { position: absolute; top: 430px; left: 50%; transform: translateX(-50%); font-size: 16px; font-weight: 900; color: var(--green-border); -webkit-text-stroke: 0.5px var(--black-line); z-index: 10; }
         .text-makassar { position: absolute; top: 485px; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; font-size: 32px; font-family: "Impact", "Arial Black", sans-serif; color: white; letter-spacing: 3px; -webkit-text-stroke: 1.5px var(--black-line); text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; z-index: 10; }
 
@@ -229,33 +231,33 @@
 
         /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN --- */
         
-        /* [DIKUNCI] Segitiga (Sudah Sempurna di Sudut Ungu Kiri) */
+        /* [DIKUNCI] Segitiga */
         .pos-segitiga { top: 90px; left: 20px; }
         .pos-segitiga .css-arrow { left: 100%; width: 310px; transform: rotate(49deg); } 
 
-        /* [DIKUNCI] Bintang (Sudah Sempurna di Bintang Emas) */
+        /* [DIKUNCI] Bintang */
         .pos-bintang { top: 90px; right: 20px; }
         .pos-bintang .css-arrow { left: 0; width: 330px; transform: rotate(148deg); } 
 
-        /* [DIKUNCI] Tongkat (Sudah Sempurna di Tongkat Emas) */
+        /* [DIKUNCI] Tongkat */
         .pos-tongkat { top: 380px; right: 10px; }
         .pos-tongkat .css-arrow { left: 0; width: 295px; transform: rotate(176deg); } 
 
-        /* [DIPERBAIKI FINAL] Phinisi: Sudut diarahkan LEBIH NAIK agar pas mendarat tepat di dalam lambung perahu merah */
-        .pos-phinisi { top: 380px; left: 10px; }
-        .pos-phinisi .css-arrow { left: 100%; width: 280px; transform: rotate(14deg); } 
-
-        /* [DIKUNCI] Molar: (Sudah Sempurna di akar gigi) */
-        .pos-molar { top: 660px; left: 20px; }
-        .pos-molar .css-arrow { left: 100%; width: 395px; transform: rotate(-43deg); } 
-
-        /* [DIKUNCI] Angka 2014: (Sudah Sempurna di atas angka 2014) */
+        /* [DIKUNCI] Angka 2014 */
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
         .pos-2014 .css-arrow { left: 50%; top: 100%; width: 385px; transform: rotate(90deg); } 
 
-        /* [DIPERBAIKI FINAL] Ular: Sudut ditarik tepat ke tengah mengarah langsung ke lilitan badan ular hitam pada tongkat */
+        /* [DIPERBAIKI FINAL] Molar: Dikembalikan presisi agar mengarah murni ke akar gigi putih */
+        .pos-molar { top: 660px; left: 20px; }
+        .pos-molar .css-arrow { left: 100%; width: 385px; transform: rotate(-39deg); } 
+
+        /* [DIPERBAIKI FINAL] Phinisi: Sudut dinaikkan lagi agar mendarat persis di area merah lambung kapal */
+        .pos-phinisi { top: 380px; left: 10px; }
+        .pos-phinisi .css-arrow { left: 100%; width: 270px; transform: rotate(10deg); } 
+
+        /* [DIPERBAIKI FINAL] Ular: Ujung panah ditarik drastis ke atas menuju tengah lilitan ular di tongkat emas */
         .pos-ular { top: 660px; right: 20px; }
-        .pos-ular .css-arrow { left: 0; width: 385px; transform: rotate(225deg); } 
+        .pos-ular .css-arrow { left: 0; width: 405px; transform: rotate(224deg); } 
 
 
         /* --- TATA LETAK MOBILE --- */
@@ -271,6 +273,7 @@
     </style>
 </head>
 <body>
+
     <header class="ui-header">
         <div class="badge-kabinet">KABINET DEDIKASI KARSA</div>
         <h1>Arti & Makna Tiap Bagian<br>Lambang KBMFKG-UMI</h1>
