@@ -144,15 +144,24 @@
         .molar-root.right { right: 4px; border-radius: 10px 10px 70px 40px; transform: rotate(-14deg); }
         .molar-cover { position: absolute; top: 50px; left: 25px; width: 110px; height: 40px; background-color: var(--white-molar); z-index: 2; }
 
-        /* 5. SEGITIGA HOLLOW (PERBAIKAN KETEBALAN BORDER AGAR TIPIS DAN KONSISTEN) */
+        /* 5. SEGITIGA HOLLOW (KETEBALAN BORDER DALAM HITAM SUPER TIPIS DAN KONSISTEN) */
+        /* Perbaikan: Memisahkan nilai clip-path agar setiap lapis memiliki proporsi lubang yang presisi */
         .triangle-hollow { 
             position: absolute; left: 50%; transform: translateX(-50%); 
-            /* Clip-path disesuaikan (5% 6%) agar border hitam & ungu menjadi tipis merata di semua sisi */
-            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 4.5% 5.5%, 50% 90%, 95.5% 5.5%, 4.5% 5.5%); 
         }
-        .tri-outer-black { top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; }
-        .tri-mid-purple { top: 221px; width: 236px; height: 207px; background-color: var(--purple-bg); z-index: 6; }
-        .tri-inner-black { top: 227px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; }
+        .tri-outer-black { 
+            top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; 
+            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 6.8% 7.3%, 50% 92.5%, 93.2% 7.3%, 6.8% 7.3%);
+        }
+        .tri-mid-purple { 
+            top: 221px; width: 236px; height: 207px; background-color: var(--purple-bg); z-index: 6; 
+            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 4.2% 4.8%, 50% 95.5%, 95.8% 4.8%, 4.2% 4.8%);
+        }
+        .tri-inner-black { 
+            top: 227px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; 
+            /* Clip-path khusus untuk inner layer (1.2% dan 1.5%) menghasilkan border hitam yang sangat tipis dan elegan (~2.5px) */
+            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 1.2% 1.5%, 50% 98.5%, 98.8% 1.5%, 1.2% 1.5%);
+        }
 
         /* 6. PERAHU PHINISI (Bentuk Presisi Sempurna dengan ujung tajam) */
         .phinisi-outer { 
@@ -241,7 +250,7 @@
         .pos-tongkat { top: 380px; right: 10px; }
         .pos-tongkat .css-arrow { left: 0; width: 305px; transform: rotate(200deg); } 
 
-        /* [DIPERBAIKI FINAL] Phinisi: Sudut dinaikkan agar panah mendarat presisi di bagian atas lambung perahu merah */
+        /* [DIKUNCI] Phinisi: Sudut dinaikkan agar panah mendarat presisi di bagian atas lambung perahu merah */
         .pos-phinisi { top: 380px; left: 10px; }
         .pos-phinisi .css-arrow { left: 100%; width: 268px; transform: rotate(10deg); } 
 
@@ -253,7 +262,7 @@
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
         .pos-2014 .css-arrow { left: 50%; top: 100%; width: 385px; transform: rotate(90deg); } 
 
-        /* [DIPERBAIKI FINAL] Ular: Diperpanjang ke tengah dan sudut dikalibrasi agar menembus tepat ke area badan ular hitam di tiang */
+        /* [DIKUNCI] Ular: Diperpanjang ke tengah dan sudut dikalibrasi agar menembus tepat ke area badan ular hitam di tiang */
         .pos-ular { top: 660px; right: 20px; }
         .pos-ular .css-arrow { left: 0; width: 430px; transform: rotate(228deg); } 
 
