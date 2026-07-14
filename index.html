@@ -136,14 +136,14 @@
             -webkit-text-stroke: 1px var(--black-line); text-shadow: 1px 1px 0 #000; 
         }
 
-        /* 4. GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - PROPORSI MEMANJANG) */
+        /* 4. GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - RAMPING PRESISI & MEMANJANG) */
         .molar-container {
             position: absolute;
-            top: 220px; /* Disesuaikan agar proporsi gigi memanjang tetap berada di tengah */
+            top: 215px; /* Dinaikkan sedikit agar proporsi yang memanjang ke bawah tetap sentris */
             left: 50%;
             transform: translateX(-50%);
-            width: 140px; /* Dipersempit sedikit dari 160px agar tidak gepeng */
-            height: 205px; /* Ditinggikan dari 180px untuk kesan proporsional */
+            width: 126px; /* Dipersempit agar benar-benar ramping dan tidak gendut */
+            height: 220px; /* Ditinggikan lagi untuk efek proporsional yang memanjang */
             z-index: 4;
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)) drop-shadow(0 5px 10px rgba(0,0,0,0.4));
         }
@@ -151,25 +151,25 @@
         /* --- AKAR (Layer Belakang) --- */
         .molar-root-3d {
             position: absolute;
-            top: 85px; /* Diturunkan karena body lebih tinggi */
-            width: 55px; /* Dikecilkan proporsional */
-            height: 115px; /* Akar lebih panjang */
+            top: 95px; /* Diturunkan menyesuaikan body yang lebih ramping */
+            width: 48px; /* Dikecilkan agar akar lebih langsing */
+            height: 130px; /* Akar lebih panjang */
             z-index: 1;
         }
         .molar-root-3d.left {
-            left: 12px;
+            left: 14px;
             background: linear-gradient(110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
             border-radius: 15px 15px 40px 50px / 15px 15px 60px 80px;
-            transform: rotate(12deg); /* Rotasi sedikit dikurangi agar terkesan lebih vertikal */
+            transform: rotate(9deg); /* Rotasi sedikit dikurangi agar terkesan lebih vertikal */
             box-shadow:
                 inset 10px -5px 15px rgba(255,255,255,0.8),
                 inset -8px 0px 20px rgba(120, 80, 50, 0.4);
         }
         .molar-root-3d.right {
-            right: 12px;
+            right: 14px;
             background: linear-gradient(-110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
             border-radius: 15px 15px 50px 40px / 15px 15px 80px 60px;
-            transform: rotate(-12deg);
+            transform: rotate(-9deg);
             box-shadow:
                 inset -10px -5px 15px rgba(255,255,255,0.8),
                 inset 8px 0px 20px rgba(120, 80, 50, 0.4);
@@ -178,11 +178,11 @@
         /* --- BADAN GIGI (Layer Tengah: transisi mahkota ke akar) --- */
         .molar-body-3d {
             position: absolute;
-            top: 45px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 105px; /* Dipersempit agar tidak gepeng */
-            height: 100px; /* Dibuat lebih tinggi */
+            width: 96px; /* Dipersempit tajam agar tidak gemuk */
+            height: 110px; /* Dibuat lebih tinggi */
             background: radial-gradient(circle at 50% 30%, #fdfcfb 0%, #f2e9de 40%, #d8be9f 80%, #bb9270 100%);
             border-radius: 40px 40px 45px 45px / 30px 30px 60px 60px;
             z-index: 2;
@@ -196,8 +196,8 @@
         .molar-lobe-3d {
             position: absolute;
             top: 0;
-            width: 82px; /* Disesuaikan dengan body yang baru */
-            height: 95px; /* Dibuat lebih tinggi memanjang */
+            width: 76px; /* Mengecil agar proporsional dengan body yang ramping */
+            height: 100px; /* Dibuat memanjang */
             z-index: 3;
         }
         .molar-lobe-3d.left {
@@ -223,8 +223,8 @@
             top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 24px;
-            height: 105px;
+            width: 20px; /* Menyusut agar belahan proporsional dengan gigi ramping */
+            height: 115px; /* Belahan lebih panjang */
             background: radial-gradient(ellipse at center, rgba(140, 90, 60, 0.4) 0%, rgba(140, 90, 60, 0.1) 40%, transparent 70%);
             border-radius: 50%;
             z-index: 4;
@@ -235,21 +235,21 @@
         .molar-glare {
             position: absolute;
             top: 10px;
-            width: 38px;
+            width: 32px;
             height: 28px;
             background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0) 75%);
             border-radius: 50%;
             z-index: 5;
             filter: blur(1px);
         }
-        .molar-glare.left { left: 12px; transform: rotate(-25deg); }
-        .molar-glare.right { right: 12px; transform: rotate(25deg); }
+        .molar-glare.left { left: 14px; transform: rotate(-25deg); }
+        .molar-glare.right { right: 14px; transform: rotate(25deg); }
 
         .molar-glare-edge {
             position: absolute;
             top: 35px;
-            width: 10px;
-            height: 70px;
+            width: 8px;
+            height: 75px;
             background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
             z-index: 5;
@@ -406,7 +406,7 @@
                     <div class="text-kbmfkg">KBMFKG</div>
                     <div class="text-curved-container" id="curved-text"></div>
                     
-                    <!-- GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - PROPORSI MEMANJANG) -->
+                    <!-- GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - RAMPING PRESISI & MEMANJANG) -->
                     <div class="molar-container">
                         <!-- Akar Gigi (Layer Belakang) -->
                         <div class="molar-root-3d left"></div>
