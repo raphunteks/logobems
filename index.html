@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI Interaktif Filosofi KBMFKG-UMI (Expert Pure CSS Logo)</title>
+    <title>UI Interaktif Filosofi KBMFKG-UMI (Image Logo)</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,14 +15,6 @@
             --text-dark: #334155; 
             --line-color: #3b82f6;
             --line-hover: #f59e0b; 
-
-            /* --- VARIABEL LOGO PURE CSS --- */
-            --purple-bg: #6a3c97;
-            --green-border: #009a44;
-            --red-phinisi: #ed1c24;
-            --yellow-gold: #fff200;
-            --black-line: #000000;
-            --white-molar: #ffffff;
         }
 
         * {
@@ -93,7 +85,7 @@
         }
 
         /* =========================================
-           LOGO PURE CSS (SUPER UPGRADE EXPERT)
+           LOGO IMAGE CONTAINER
            ========================================= */
         .center-logo-wrapper {
             position: absolute;
@@ -110,198 +102,16 @@
 
         .logo-container {
             position: relative;
-            width: 500px;
+            width: 500px; /* Ukuran dipertahankan agar panah tetap pas */
             height: 600px;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
         }
 
-        /* 1. SHIELD / PERISAI (Presisi 100% menampung tulisan Makassar) */
-        .shield { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .shield-layer-1-black { background-color: var(--black-line); clip-path: path('M 250 20 Q 400 50 480 90 C 490 320 380 490 250 580 C 120 490 10 320 20 90 Q 100 50 250 20 Z'); z-index: 0; }
-        .shield-layer-2-green { background-color: var(--green-border); clip-path: path('M 250 32 Q 395 60 468 98 C 477 318 373 480 250 565 C 127 480 23 318 32 98 Q 105 60 250 32 Z'); z-index: 1; }
-        .shield-layer-3-black { background-color: var(--black-line); clip-path: path('M 250 42 Q 388 68 456 105 C 464 315 365 470 250 550 C 135 470 36 315 44 105 Q 112 68 250 42 Z'); z-index: 2; }
-        .shield-layer-4-purple { background-color: var(--purple-bg); clip-path: path('M 250 50 Q 382 74 446 110 C 454 312 358 462 250 538 C 142 462 46 312 54 110 Q 118 74 250 50 Z'); z-index: 3; }
-
-        /* 2. TEKS KBMFKG (Dinaikkan agar tidak menimpa teks melengkung) */
-        .text-kbmfkg {
-            position: absolute; top: 65px; left: 50%; transform: translateX(-50%); width: 100%; text-align: center;
-            font-size: 52px; font-family: "Impact", "Arial Black", sans-serif; color: white; letter-spacing: 4px;
-            -webkit-text-stroke: 2px var(--black-line); text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; z-index: 10;
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Memastikan logo PNG tidak terpotong atau distorsi */
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25)); /* Memberi efek pop-up pada PNG */
         }
-
-        /* 3. TEKS MELENGKUNG (Titik pusat diturunkan, tidak overlap dengan KBMFKG) */
-        .text-curved-container { position: absolute; top: 300px; left: 50%; width: 0; height: 0; z-index: 10; }
-        .text-curved-container span {
-            position: absolute; left: 0; top: 0; color: white; font-size: 15px; font-family: "Courier New", Courier, monospace; font-weight: bold;
-            -webkit-text-stroke: 1px var(--black-line); text-shadow: 1px 1px 0 #000; 
-        }
-
-        /* 4. GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - RAMPING PRESISI & MEMANJANG) */
-        .molar-container {
-            position: absolute;
-            top: 215px; /* Dinaikkan sedikit agar proporsi yang memanjang ke bawah tetap sentris */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 126px; /* Dipersempit agar benar-benar ramping dan tidak gendut */
-            height: 220px; /* Ditinggikan lagi untuk efek proporsional yang memanjang */
-            z-index: 4;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)) drop-shadow(0 5px 10px rgba(0,0,0,0.4));
-        }
-
-        /* --- AKAR (Layer Belakang) --- */
-        .molar-root-3d {
-            position: absolute;
-            top: 95px; /* Diturunkan menyesuaikan body yang lebih ramping */
-            width: 48px; /* Dikecilkan agar akar lebih langsing */
-            height: 130px; /* Akar lebih panjang */
-            z-index: 1;
-        }
-        .molar-root-3d.left {
-            left: 14px;
-            background: linear-gradient(110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
-            border-radius: 15px 15px 40px 50px / 15px 15px 60px 80px;
-            transform: rotate(9deg); /* Rotasi sedikit dikurangi agar terkesan lebih vertikal */
-            box-shadow:
-                inset 10px -5px 15px rgba(255,255,255,0.8),
-                inset -8px 0px 20px rgba(120, 80, 50, 0.4);
-        }
-        .molar-root-3d.right {
-            right: 14px;
-            background: linear-gradient(-110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
-            border-radius: 15px 15px 50px 40px / 15px 15px 80px 60px;
-            transform: rotate(-9deg);
-            box-shadow:
-                inset -10px -5px 15px rgba(255,255,255,0.8),
-                inset 8px 0px 20px rgba(120, 80, 50, 0.4);
-        }
-
-        /* --- BADAN GIGI (Layer Tengah: transisi mahkota ke akar) --- */
-        .molar-body-3d {
-            position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 96px; /* Dipersempit tajam agar tidak gemuk */
-            height: 110px; /* Dibuat lebih tinggi */
-            background: radial-gradient(circle at 50% 30%, #fdfcfb 0%, #f2e9de 40%, #d8be9f 80%, #bb9270 100%);
-            border-radius: 40px 40px 45px 45px / 30px 30px 60px 60px;
-            z-index: 2;
-            box-shadow:
-                inset 15px 0 20px rgba(255,255,255,0.6),
-                inset -15px 0 20px rgba(255,255,255,0.6),
-                inset 0 -15px 25px rgba(120, 80, 50, 0.3);
-        }
-
-        /* --- MAHKOTA / LOBES (Layer Depan: bentuk hati di atas) --- */
-        .molar-lobe-3d {
-            position: absolute;
-            top: 0;
-            width: 76px; /* Mengecil agar proporsional dengan body yang ramping */
-            height: 100px; /* Dibuat memanjang */
-            z-index: 3;
-        }
-        .molar-lobe-3d.left {
-            left: 0;
-            background: radial-gradient(circle at 40% 30%, #ffffff 0%, #fdfcfb 35%, #e8decb 75%, #cba788 100%);
-            border-radius: 65px 45px 45px 35px / 75px 55px 45px 35px;
-            box-shadow:
-                inset 8px 12px 20px rgba(255,255,255,1),
-                inset -5px -10px 20px rgba(140, 90, 60, 0.15);
-        }
-        .molar-lobe-3d.right {
-            right: 0;
-            background: radial-gradient(circle at 60% 30%, #ffffff 0%, #fdfcfb 35%, #e8decb 75%, #cba788 100%);
-            border-radius: 45px 65px 35px 45px / 55px 75px 35px 45px;
-            box-shadow:
-                inset -8px 12px 20px rgba(255,255,255,1),
-                inset 5px -10px 20px rgba(140, 90, 60, 0.15);
-        }
-
-        /* --- CREASE / BELAHAN TENGAH (Bayangan Dalam) --- */
-        .molar-crease-3d {
-            position: absolute;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px; /* Menyusut agar belahan proporsional dengan gigi ramping */
-            height: 115px; /* Belahan lebih panjang */
-            background: radial-gradient(ellipse at center, rgba(140, 90, 60, 0.4) 0%, rgba(140, 90, 60, 0.1) 40%, transparent 70%);
-            border-radius: 50%;
-            z-index: 4;
-            mix-blend-mode: multiply;
-        }
-
-        /* --- GLARE / PANTULAN CAHAYA (Efek glossy 3D seperti keramik) --- */
-        .molar-glare {
-            position: absolute;
-            top: 10px;
-            width: 32px;
-            height: 28px;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0) 75%);
-            border-radius: 50%;
-            z-index: 5;
-            filter: blur(1px);
-        }
-        .molar-glare.left { left: 14px; transform: rotate(-25deg); }
-        .molar-glare.right { right: 14px; transform: rotate(25deg); }
-
-        .molar-glare-edge {
-            position: absolute;
-            top: 35px;
-            width: 8px;
-            height: 75px;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: 5;
-            filter: blur(1px);
-        }
-        .molar-glare-edge.left { left: 3px; transform: rotate(10deg); }
-        .molar-glare-edge.right { right: 3px; transform: rotate(-10deg); }
-
-
-        /* 5. SEGITIGA HOLLOW (PERBAIKAN KETEBALAN BORDER AGAR TIPIS DAN KONSISTEN) */
-        .triangle-hollow { 
-            position: absolute; left: 50%; transform: translateX(-50%); 
-            /* Clip-path disesuaikan (5% 6%) agar border hitam & ungu menjadi tipis merata di semua sisi */
-            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 4.5% 5.5%, 50% 90%, 95.5% 5.5%, 4.5% 5.5%); 
-        }
-        .tri-outer-black { top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; }
-        .tri-mid-purple { top: 221px; width: 236px; height: 207px; background-color: var(--purple-bg); z-index: 6; }
-        .tri-inner-black { top: 227px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; }
-
-        /* 6. PERAHU PHINISI (Bentuk Presisi Sempurna dengan ujung tajam) */
-        .phinisi-outer { 
-            position: absolute; top: 415px; left: 50%; transform: translateX(-50%); width: 200px; height: 55px; background: var(--black-line); 
-            clip-path: path('M 0 10 Q 100 25 200 10 C 180 70 120 75 100 75 C 80 75 20 70 0 10 Z'); z-index: 7; 
-        }
-        .phinisi-inner { 
-            position: absolute; top: 419px; left: 50%; transform: translateX(-50%); width: 190px; height: 47px; background: var(--red-phinisi); 
-            clip-path: path('M 0 10 Q 95 24 190 10 C 171 66 114 71 95 71 C 76 71 19 66 0 10 Z'); z-index: 8; 
-        }
-
-        /* 7. BULAN BINTANG */
-        .crescent-star { position: absolute; top: 145px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; z-index: 9; filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black) drop-shadow(1px -1px 0 black) drop-shadow(-1px 1px 0 black); }
-        .crescent { position: absolute; top: 5px; left: 10px; width: 25px; height: 25px; border-radius: 50%; box-shadow: inset 6px 6px 0 var(--yellow-gold); transform: rotate(-20deg); }
-        .star { position: absolute; top: 12px; left: 22px; width: 15px; height: 15px; background-color: var(--yellow-gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
-
-        /* 8. TONGKAT AESCULAPIUS (Tampil Paling Atas di atas Gigi & Segitiga) */
-        .staff { position: absolute; top: 195px; left: 50%; transform: translateX(-50%); width: 10px; height: 215px; background-color: var(--yellow-gold); border: 2px solid var(--black-line); border-radius: 5px; z-index: 8; }
-
-        /* 9. ULAR MELILIT (Lilitan di-kalibrasi mengikuti tongkat) */
-        .snake-segment { position: absolute; left: 50%; width: 45px; height: 35px; border: 5px solid var(--black-line); border-radius: 50%; }
-        .sn-b1 { top: 225px; transform: translateX(-35%) rotate(15deg); border-top-color: transparent; border-right-color: transparent; z-index: 7; }
-        .sn-f1 { top: 245px; transform: translateX(-65%) rotate(15deg); border-bottom-color: transparent; border-left-color: transparent; z-index: 9; }
-        .sn-b2 { top: 270px; transform: translateX(-35%) rotate(15deg); border-top-color: transparent; border-right-color: transparent; z-index: 7; }
-        .sn-f2 { top: 290px; transform: translateX(-65%) rotate(15deg); border-bottom-color: transparent; border-left-color: transparent; z-index: 9; }
-        .sn-b3 { top: 315px; transform: translateX(-35%) rotate(15deg); border-top-color: transparent; border-right-color: transparent; z-index: 7; }
-        .sn-f3 { top: 335px; transform: translateX(-65%) rotate(15deg); border-bottom-color: transparent; border-left-color: transparent; z-index: 9; }
-        .sn-b4 { top: 360px; transform: translateX(-35%) rotate(15deg); border-top-color: transparent; border-right-color: transparent; z-index: 7; }
-        .sn-tail { position: absolute; top: 382px; left: 50%; transform: translateX(-110%) rotate(40deg); width: 18px; height: 18px; border: 5px solid var(--black-line); border-top-color: transparent; border-right-color: transparent; border-bottom-color: transparent; border-radius: 50%; z-index: 9; }
-        .sn-head { position: absolute; top: 200px; left: 50%; transform: translateX(-110%) rotate(-15deg); width: 22px; height: 14px; background-color: var(--black-line); border-radius: 50% 50% 10px 10px; z-index: 9; }
-
-        /* 10. TEKS BAWAH (Font diturunkan ke 485px, masuk sempurna dalam perisai) */
-        .text-2014 { position: absolute; top: 430px; left: 50%; transform: translateX(-50%); font-size: 16px; font-weight: 900; color: var(--green-border); -webkit-text-stroke: 0.5px var(--black-line); z-index: 10; }
-        .text-makassar { position: absolute; top: 485px; left: 50%; transform: translateX(-50%); width: 100%; text-align: center; font-size: 32px; font-family: "Impact", "Arial Black", sans-serif; color: white; letter-spacing: 3px; -webkit-text-stroke: 1.5px var(--black-line); text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; z-index: 10; }
 
         /* =========================================
            KARTU PENJELASAN (UI CARDS)
@@ -396,63 +206,8 @@
             
             <div class="center-logo-wrapper">
                 <div class="logo-container">
-                    <!-- Shield Presisi Asli -->
-                    <div class="shield shield-layer-1-black"></div>
-                    <div class="shield shield-layer-2-green"></div>
-                    <div class="shield shield-layer-3-black"></div>
-                    <div class="shield shield-layer-4-purple"></div>
-                    
-                    <!-- Teks Utama & Melengkung (Tidak Overlap!) -->
-                    <div class="text-kbmfkg">KBMFKG</div>
-                    <div class="text-curved-container" id="curved-text"></div>
-                    
-                    <!-- GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - RAMPING PRESISI & MEMANJANG) -->
-                    <div class="molar-container">
-                        <!-- Akar Gigi (Layer Belakang) -->
-                        <div class="molar-root-3d left"></div>
-                        <div class="molar-root-3d right"></div>
-                        <!-- Badan Gigi (Layer Tengah) -->
-                        <div class="molar-body-3d"></div>
-                        <!-- Mahkota Gigi (Layer Depan) -->
-                        <div class="molar-lobe-3d left"></div>
-                        <div class="molar-lobe-3d right"></div>
-                        <!-- Efek Lipatan Tengah & Pantulan Cahaya 3D -->
-                        <div class="molar-crease-3d"></div>
-                        <div class="molar-glare left"></div>
-                        <div class="molar-glare right"></div>
-                        <div class="molar-glare-edge left"></div>
-                        <div class="molar-glare-edge right"></div>
-                    </div>
-                    
-                    <!-- Segitiga Hollow 3 Lapis (TENGAH BOLONG TRANSPARAN BORDER SUPER TIPIS KONSISTEN!) -->
-                    <div class="triangle-hollow tri-outer-black"></div>
-                    <div class="triangle-hollow tri-mid-purple"></div>
-                    <div class="triangle-hollow tri-inner-black"></div>
-                    
-                    <!-- Phinisi Presisi & Tahun -->
-                    <div class="phinisi-outer"></div>
-                    <div class="phinisi-inner"></div>
-                    <div class="text-2014">2014</div>
-                    
-                    <!-- Simbol Atas & Tongkat/Ular di Layer Paling Depan -->
-                    <div class="crescent-star">
-                        <div class="crescent"></div>
-                        <div class="star"></div>
-                    </div>
-                    <div class="staff"></div>
-                    
-                    <div class="snake-segment sn-b1"></div>
-                    <div class="snake-segment sn-f1"></div>
-                    <div class="snake-segment sn-b2"></div>
-                    <div class="snake-segment sn-f2"></div>
-                    <div class="snake-segment sn-b3"></div>
-                    <div class="snake-segment sn-f3"></div>
-                    <div class="snake-segment sn-b4"></div>
-                    <div class="sn-tail"></div>
-                    <div class="sn-head"></div>
-                    
-                    <!-- Makassar tidak offside -->
-                    <div class="text-makassar">MAKASSAR</div>
+                    <!-- FOTO LOGO PNG DIAMBIL DARI GITHUB -->
+                    <img src="bemfkgumi.png" alt="Logo KBMFKG UMI" class="logo-img">
                 </div>
             </div>
 
@@ -542,27 +297,5 @@
         </div>
     </div>
 
-    <script>
-        // JS Sempurna untuk Melengkungkan Teks di Bawah KBMFKG Tanpa Overlap
-        const text = "UNIVERSITAS MUSLIM INDONESIA";
-        const container = document.getElementById('curved-text');
-        
-        // Radius diperkecil dan diletakkan lebih rendah (top: 300px) agar pas membingkai Molar dan tidak nabrak KBMFKG
-        const radius = 160; 
-        const startAngle = -42; 
-        const endAngle = 42;
-        const totalAngle = endAngle - startAngle;
-        const step = totalAngle / (text.length - 1);
-
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            const span = document.createElement('span');
-            span.innerText = char === ' ' ? '\u00A0' : char; 
-            
-            const angle = startAngle + (i * step);
-            span.style.transform = `translate(-50%, 0) rotate(${angle}deg) translateY(-${radius}px)`;
-            container.appendChild(span);
-        }
-    </script>
 </body>
 </html>
