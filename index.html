@@ -136,43 +136,42 @@
             -webkit-text-stroke: 1px var(--black-line); text-shadow: 1px 1px 0 #000; 
         }
 
-        /* 4. GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - HARUS SEPERTI GBR 1) */
+        /* 4. GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - PROPORSI MEMANJANG) */
         .molar-container {
             position: absolute;
-            top: 235px;
+            top: 220px; /* Disesuaikan agar proporsi gigi memanjang tetap berada di tengah */
             left: 50%;
             transform: translateX(-50%);
-            width: 160px;
-            height: 180px;
+            width: 140px; /* Dipersempit sedikit dari 160px agar tidak gepeng */
+            height: 205px; /* Ditinggikan dari 180px untuk kesan proporsional */
             z-index: 4;
-            /* Filter drop shadow memberikan dimensi pop-out tanpa border hitam yang kasar */
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)) drop-shadow(0 5px 10px rgba(0,0,0,0.4));
         }
 
         /* --- AKAR (Layer Belakang) --- */
         .molar-root-3d {
             position: absolute;
-            top: 75px;
-            width: 65px;
-            height: 100px;
+            top: 85px; /* Diturunkan karena body lebih tinggi */
+            width: 55px; /* Dikecilkan proporsional */
+            height: 115px; /* Akar lebih panjang */
             z-index: 1;
         }
         .molar-root-3d.left {
             left: 12px;
             background: linear-gradient(110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
-            border-radius: 15px 15px 40px 50px / 15px 15px 60px 70px;
-            transform: rotate(14deg);
+            border-radius: 15px 15px 40px 50px / 15px 15px 60px 80px;
+            transform: rotate(12deg); /* Rotasi sedikit dikurangi agar terkesan lebih vertikal */
             box-shadow:
-                inset 12px -5px 15px rgba(255,255,255,0.8),
+                inset 10px -5px 15px rgba(255,255,255,0.8),
                 inset -8px 0px 20px rgba(120, 80, 50, 0.4);
         }
         .molar-root-3d.right {
             right: 12px;
             background: linear-gradient(-110deg, #fdfcfb 0%, #ebe0d3 40%, #cba788 90%, #a87f5e 100%);
-            border-radius: 15px 15px 50px 40px / 15px 15px 70px 60px;
-            transform: rotate(-14deg);
+            border-radius: 15px 15px 50px 40px / 15px 15px 80px 60px;
+            transform: rotate(-12deg);
             box-shadow:
-                inset -12px -5px 15px rgba(255,255,255,0.8),
+                inset -10px -5px 15px rgba(255,255,255,0.8),
                 inset 8px 0px 20px rgba(120, 80, 50, 0.4);
         }
 
@@ -182,10 +181,10 @@
             top: 45px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 85px;
+            width: 105px; /* Dipersempit agar tidak gepeng */
+            height: 100px; /* Dibuat lebih tinggi */
             background: radial-gradient(circle at 50% 30%, #fdfcfb 0%, #f2e9de 40%, #d8be9f 80%, #bb9270 100%);
-            border-radius: 40px 40px 45px 45px / 30px 30px 55px 55px;
+            border-radius: 40px 40px 45px 45px / 30px 30px 60px 60px;
             z-index: 2;
             box-shadow:
                 inset 15px 0 20px rgba(255,255,255,0.6),
@@ -197,14 +196,14 @@
         .molar-lobe-3d {
             position: absolute;
             top: 0;
-            width: 95px;
-            height: 90px;
+            width: 82px; /* Disesuaikan dengan body yang baru */
+            height: 95px; /* Dibuat lebih tinggi memanjang */
             z-index: 3;
         }
         .molar-lobe-3d.left {
             left: 0;
             background: radial-gradient(circle at 40% 30%, #ffffff 0%, #fdfcfb 35%, #e8decb 75%, #cba788 100%);
-            border-radius: 65px 45px 45px 35px / 70px 55px 45px 35px;
+            border-radius: 65px 45px 45px 35px / 75px 55px 45px 35px;
             box-shadow:
                 inset 8px 12px 20px rgba(255,255,255,1),
                 inset -5px -10px 20px rgba(140, 90, 60, 0.15);
@@ -212,7 +211,7 @@
         .molar-lobe-3d.right {
             right: 0;
             background: radial-gradient(circle at 60% 30%, #ffffff 0%, #fdfcfb 35%, #e8decb 75%, #cba788 100%);
-            border-radius: 45px 65px 35px 45px / 55px 70px 35px 45px;
+            border-radius: 45px 65px 35px 45px / 55px 75px 35px 45px;
             box-shadow:
                 inset -8px 12px 20px rgba(255,255,255,1),
                 inset 5px -10px 20px rgba(140, 90, 60, 0.15);
@@ -224,8 +223,8 @@
             top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 28px;
-            height: 95px;
+            width: 24px;
+            height: 105px;
             background: radial-gradient(ellipse at center, rgba(140, 90, 60, 0.4) 0%, rgba(140, 90, 60, 0.1) 40%, transparent 70%);
             border-radius: 50%;
             z-index: 4;
@@ -236,21 +235,21 @@
         .molar-glare {
             position: absolute;
             top: 10px;
-            width: 45px;
-            height: 25px;
+            width: 38px;
+            height: 28px;
             background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0) 75%);
             border-radius: 50%;
             z-index: 5;
             filter: blur(1px);
         }
-        .molar-glare.left { left: 15px; transform: rotate(-25deg); }
-        .molar-glare.right { right: 15px; transform: rotate(25deg); }
+        .molar-glare.left { left: 12px; transform: rotate(-25deg); }
+        .molar-glare.right { right: 12px; transform: rotate(25deg); }
 
         .molar-glare-edge {
             position: absolute;
             top: 35px;
-            width: 12px;
-            height: 65px;
+            width: 10px;
+            height: 70px;
             background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
             z-index: 5;
@@ -407,7 +406,7 @@
                     <div class="text-kbmfkg">KBMFKG</div>
                     <div class="text-curved-container" id="curved-text"></div>
                     
-                    <!-- GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - HARUS SEPERTI GBR 1) -->
+                    <!-- GIGI MOLAR (EXPERT PURE CSS 3D UPGRADE - PROPORSI MEMANJANG) -->
                     <div class="molar-container">
                         <!-- Akar Gigi (Layer Belakang) -->
                         <div class="molar-root-3d left"></div>
