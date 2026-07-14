@@ -229,35 +229,37 @@
         @keyframes pulse-dot { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
         @keyframes pulse-dot-hover { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); } 70% { transform: scale(1.3); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN (DIPERPANJANG & DIKALIBRASI) --- */
+        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN (SUPER KALIBRASI ULANG) --- */
         
+        /* [DIKUNCI] Segitiga (Sudah Sempurna di Sudut Ungu Kiri) */
         .pos-segitiga { top: 90px; left: 20px; }
-        /* Diperpanjang & disesuaikan derajatnya agar menyentuh sudut Segitiga Ungu atas kiri */
         .pos-segitiga .css-arrow { left: 100%; width: 310px; transform: rotate(49deg); } 
 
-        .pos-phinisi { top: 380px; left: 10px; }
-        /* Diperpanjang agar ujungnya menempel mulus di sudut runcing merah perahu phinisi */
-        .pos-phinisi .css-arrow { left: 100%; width: 255px; transform: rotate(28deg); } 
-
-        .pos-molar { top: 660px; left: 20px; }
-        /* Diperpanjang agar menempel persis menunjuk ke akar gigi bawah kiri */
-        .pos-molar .css-arrow { left: 100%; width: 335px; transform: rotate(-41deg); } 
-
-        .pos-2014 { top: 30px; left: 450px; width: 300px; }
-        /* Turun sempurna tepat berhenti sebelum angka 2014 */
-        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 410px; transform: rotate(90deg); } 
-
+        /* [DIKUNCI] Bintang (Sudah Sempurna di Bintang Emas) */
         .pos-bintang { top: 90px; right: 20px; }
-        /* Diperpanjang agar menempel pada sisi Bulan/Bintang emas */
         .pos-bintang .css-arrow { left: 0; width: 330px; transform: rotate(148deg); } 
 
+        /* [DIKUNCI] Tongkat (Sudah Sempurna di Tongkat Emas) */
         .pos-tongkat { top: 380px; right: 10px; }
-        /* Rotasi dirubah menjadi 175deg agar panah turun tepat ke posisi emas tongkat */
         .pos-tongkat .css-arrow { left: 0; width: 295px; transform: rotate(176deg); } 
 
+
+        /* [DIPERBAIKI] Phinisi: Sedikit diperpendek, sudut diangkat agar tepat kena ujung runcing merah kapal */
+        .pos-phinisi { top: 380px; left: 10px; }
+        .pos-phinisi .css-arrow { left: 100%; width: 235px; transform: rotate(26deg); } 
+
+        /* [DIPERBAIKI] Molar: Sudut lebih menukik ke atas agar titiknya naik menempel pas ke bawah akar gigi putih */
+        .pos-molar { top: 660px; left: 20px; }
+        .pos-molar .css-arrow { left: 100%; width: 315px; transform: rotate(-48deg); } 
+
+        /* [DIPERBAIKI] Angka 2014: Panjang dikembalikan seperti versi optimal sebelumnya agar sampai ke dasar kapal */
+        .pos-2014 { top: 30px; left: 450px; width: 300px; }
+        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 440px; transform: rotate(90deg); } 
+
+        /* [DIPERBAIKI] Ular: Sudut dirapatkan presisi agar menempel pada lekukan ekor Ular Hitam */
         .pos-ular { top: 660px; right: 20px; }
-        /* Diperpanjang ke 345px agar menempel persis ke lekukan badan ular hitam bawah */
-        .pos-ular .css-arrow { left: 0; width: 345px; transform: rotate(213deg); } 
+        .pos-ular .css-arrow { left: 0; width: 340px; transform: rotate(217deg); } 
+
 
         /* --- TATA LETAK MOBILE --- */
         @media (max-width: 991px) {
