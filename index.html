@@ -229,7 +229,7 @@
         @keyframes pulse-dot { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
         @keyframes pulse-dot-hover { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); } 70% { transform: scale(1.3); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN (SUPER KALIBRASI ULANG) --- */
+        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN --- */
         
         /* [DIKUNCI] Segitiga (Sudah Sempurna di Sudut Ungu Kiri) */
         .pos-segitiga { top: 90px; left: 20px; }
@@ -244,21 +244,21 @@
         .pos-tongkat .css-arrow { left: 0; width: 295px; transform: rotate(176deg); } 
 
 
-        /* [DIPERBAIKI] Phinisi: Sedikit diperpendek, sudut diangkat agar tepat kena ujung runcing merah kapal */
+        /* [DIPERBAIKI] Phinisi: Sudut diangkat (rotate dikecilkan) agar pas ke ujung merah kapal, panjang disesuaikan */
         .pos-phinisi { top: 380px; left: 10px; }
-        .pos-phinisi .css-arrow { left: 100%; width: 235px; transform: rotate(26deg); } 
+        .pos-phinisi .css-arrow { left: 100%; width: 250px; transform: rotate(21deg); } 
 
-        /* [DIPERBAIKI] Molar: Sudut lebih menukik ke atas agar titiknya naik menempel pas ke bawah akar gigi putih */
+        /* [DIPERBAIKI] Molar: Diperpanjang agar ujungnya tepat menyentuh akar gigi putih bawah kiri */
         .pos-molar { top: 660px; left: 20px; }
-        .pos-molar .css-arrow { left: 100%; width: 315px; transform: rotate(-48deg); } 
+        .pos-molar .css-arrow { left: 100%; width: 355px; transform: rotate(-45deg); } 
 
-        /* [DIPERBAIKI] Angka 2014: Panjang dikembalikan seperti versi optimal sebelumnya agar sampai ke dasar kapal */
+        /* [DIPERBAIKI] Angka 2014: Panjang dikurangi sedikit agar tidak bablas, berhenti persis di atas tulisan */
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
-        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 440px; transform: rotate(90deg); } 
+        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 415px; transform: rotate(90deg); } 
 
-        /* [DIPERBAIKI] Ular: Sudut dirapatkan presisi agar menempel pada lekukan ekor Ular Hitam */
+        /* [DIPERBAIKI] Ular: Diarahkan lebih ke tengah object ular (sudut disesuaikan) dan diperpanjang */
         .pos-ular { top: 660px; right: 20px; }
-        .pos-ular .css-arrow { left: 0; width: 340px; transform: rotate(217deg); } 
+        .pos-ular .css-arrow { left: 0; width: 380px; transform: rotate(208deg); } 
 
 
         /* --- TATA LETAK MOBILE --- */
