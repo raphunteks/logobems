@@ -145,15 +145,16 @@
         .molar-root.right { right: 4px; border-radius: 10px 10px 70px 40px; transform: rotate(-14deg); }
         .molar-cover { position: absolute; top: 50px; left: 25px; width: 110px; height: 40px; background-color: var(--white-molar); z-index: 2; }
 
-        /* 5. SEGITIGA HOLLOW (Tengah Transparan / Bolong agar Gigi terlihat!) */
+        /* 5. SEGITIGA HOLLOW (Ketebalan Border Dalam Hitam Sudah Dikurangi secara Presisi) */
         .triangle-hollow { 
             position: absolute; left: 50%; transform: translateX(-50%); 
-            /* Clip path ini secara magis melubangi bagian tengah segitiga */
+            /* Clip path melubangi bagian tengah segitiga secara proporsional */
             clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 12% 15%, 50% 82%, 88% 15%, 12% 15%); 
         }
         .tri-outer-black { top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; }
         .tri-mid-purple { top: 221px; width: 234px; height: 205px; background-color: var(--purple-bg); z-index: 6; }
-        .tri-inner-black { top: 229px; width: 214px; height: 187px; background-color: var(--black-line); z-index: 7; }
+        /* Mengurangi margin jarak (width, height, top) untuk membuat garis hitam dalam lebih tipis */
+        .tri-inner-black { top: 226px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; }
 
         /* 6. PERAHU PHINISI (Bentuk Presisi Sempurna dengan ujung tajam) */
         .phinisi-outer { 
@@ -228,35 +229,35 @@
         @keyframes pulse-dot { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
         @keyframes pulse-dot-hover { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); } 70% { transform: scale(1.3); box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
-        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN (SUPER AKURAT) --- */
+        /* --- POSISI KARTU & KALKULASI PANAH YANG 100% TEPAT SASARAN (SUPER AKURAT KALIBRASI ULANG) --- */
         
         .pos-segitiga { top: 90px; left: 20px; }
-        /* Mengarah tepat ke garis Segitiga Ungu (Kiri Atas) */
-        .pos-segitiga .css-arrow { left: 100%; width: 315px; transform: rotate(48deg); } 
+        /* Arrow diperpanjang & derajat disesuaikan agar menempel ke sudut Segitiga Ungu */
+        .pos-segitiga .css-arrow { left: 100%; width: 375px; transform: rotate(43deg); } 
 
         .pos-phinisi { top: 380px; left: 10px; }
-        /* Mengarah tepat ke sudut kiri lambung Perahu Phinisi */
-        .pos-phinisi .css-arrow { left: 100%; width: 215px; transform: rotate(20deg); } 
+        /* Arrow diperpanjang agar mencapai ujung tajam Perahu Phinisi */
+        .pos-phinisi .css-arrow { left: 100%; width: 290px; transform: rotate(18deg); } 
 
         .pos-molar { top: 660px; left: 20px; }
-        /* Mengarah tepat ke pangkal akar kiri Gigi Molar Putih */
-        .pos-molar .css-arrow { left: 100%; width: 315px; transform: rotate(-45deg); } 
+        /* Arrow diperpanjang agar mencapai akar Gigi Molar */
+        .pos-molar .css-arrow { left: 100%; width: 405px; transform: rotate(-38deg); } 
 
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
-        /* Menurun lurus dan berhenti TEPAT pada tulisan 2014 di dalam perahu */
-        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 420px; transform: rotate(90deg); } 
+        /* Arrow diperpanjang agar turun sempurna menyentuh angka 2014 */
+        .pos-2014 .css-arrow { left: 50%; top: 100%; width: 445px; transform: rotate(90deg); } 
 
         .pos-bintang { top: 90px; right: 20px; }
-        /* Mengarah tepat menempel pada Bulan Bintang kuning */
-        .pos-bintang .css-arrow { left: 0; width: 325px; transform: rotate(143deg); } 
+        /* Arrow ditarik lebih panjang agar menyentuh area kuning Bintang */
+        .pos-bintang .css-arrow { left: 0; width: 370px; transform: rotate(145deg); } 
 
         .pos-tongkat { top: 380px; right: 10px; }
-        /* Mengarah lurus dan berhenti persis di sebelah kanan sebelum menutupi Tongkat Kuning */
-        .pos-tongkat .css-arrow { left: 0; width: 280px; transform: rotate(183deg); } 
+        /* Arrow diperpanjang agar sangat presisi di sebelah kanan Tongkat Kuning */
+        .pos-tongkat .css-arrow { left: 0; width: 340px; transform: rotate(183deg); } 
 
         .pos-ular { top: 660px; right: 20px; }
-        /* Mengarah tepat ke lekukan badan Ular hitam bagian kanan bawah */
-        .pos-ular .css-arrow { left: 0; width: 345px; transform: rotate(223deg); } 
+        /* Arrow diperpanjang jauh ke bawah kiri agar menempel ke ekor/badan Ular hitam */
+        .pos-ular .css-arrow { left: 0; width: 415px; transform: rotate(220deg); } 
 
         /* --- TATA LETAK MOBILE --- */
         @media (max-width: 991px) {
