@@ -144,15 +144,14 @@
         .molar-root.right { right: 4px; border-radius: 10px 10px 70px 40px; transform: rotate(-14deg); }
         .molar-cover { position: absolute; top: 50px; left: 25px; width: 110px; height: 40px; background-color: var(--white-molar); z-index: 2; }
 
-        /* 5. SEGITIGA HOLLOW (KETEBALAN BORDER DALAM HITAM SUDAH DIPERTIPIS LAGI) */
+        /* 5. SEGITIGA HOLLOW (PERBAIKAN KETEBALAN BORDER AGAR TIPIS DAN KONSISTEN) */
         .triangle-hollow { 
             position: absolute; left: 50%; transform: translateX(-50%); 
-            /* Clip-path lubang diperbesar agar border di dalamnya semakin tipis sempurna */
-            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 11% 16%, 50% 86%, 89% 16%, 11% 16%); 
+            /* Clip-path disesuaikan (5% 6%) agar border hitam & ungu menjadi tipis merata di semua sisi */
+            clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0, 4.5% 5.5%, 50% 90%, 95.5% 5.5%, 4.5% 5.5%); 
         }
         .tri-outer-black { top: 215px; width: 250px; height: 220px; background-color: var(--black-line); z-index: 5; }
         .tri-mid-purple { top: 221px; width: 236px; height: 207px; background-color: var(--purple-bg); z-index: 6; }
-        /* Dimensi hitam dalam dikecilkan agar garis yang tersisa setelah di-clip sangat tipis */
         .tri-inner-black { top: 227px; width: 224px; height: 196px; background-color: var(--black-line); z-index: 7; }
 
         /* 6. PERAHU PHINISI (Bentuk Presisi Sempurna dengan ujung tajam) */
@@ -242,9 +241,9 @@
         .pos-tongkat { top: 380px; right: 10px; }
         .pos-tongkat .css-arrow { left: 0; width: 305px; transform: rotate(200deg); } 
 
-        /* [DIPERBAIKI FINAL] Phinisi: Sudut dinaikkan agar panah mendarat presisi di bagian atas lambung perahu merah */
+        /* [DIPERBAIKI FINAL] Phinisi: Sudut dinaikkan agar mendarat persis di lambung perahu merah */
         .pos-phinisi { top: 380px; left: 10px; }
-        .pos-phinisi .css-arrow { left: 100%; width: 268px; transform: rotate(10deg); } 
+        .pos-phinisi .css-arrow { left: 100%; width: 275px; transform: rotate(7deg); } 
 
         /* [DIKUNCI] Molar: Panah dipanjangkan agar persis menusuk dan bersentuhan dengan akar putih gigi */
         .pos-molar { top: 660px; left: 20px; }
@@ -254,9 +253,9 @@
         .pos-2014 { top: 30px; left: 450px; width: 300px; }
         .pos-2014 .css-arrow { left: 50%; top: 100%; width: 385px; transform: rotate(90deg); } 
 
-        /* [DIPERBAIKI FINAL] Ular: Diperpanjang ke tengah dan sudut dikalibrasi agar menembus tepat ke area badan ular hitam di tiang */
+        /* [DIPERBAIKI FINAL] Ular: Diperpanjang ke tengah ke area badan ular hitam di tiang */
         .pos-ular { top: 660px; right: 20px; }
-        .pos-ular .css-arrow { left: 0; width: 430px; transform: rotate(228deg); } 
+        .pos-ular .css-arrow { left: 0; width: 460px; transform: rotate(228deg); } 
 
         /* --- TATA LETAK MOBILE --- */
         @media (max-width: 991px) {
@@ -280,7 +279,6 @@
     <div class="canvas-wrapper">
         <div class="ui-canvas">
             
-            <!-- LOGO PURE CSS DI TENGAH (SUPER UPGRADED & PERFECT Z-INDEX) -->
             <div class="center-logo-wrapper">
                 <div class="logo-container">
                     <!-- Shield Presisi Asli -->
@@ -301,7 +299,7 @@
                         <div class="molar-cover"></div>
                     </div>
                     
-                    <!-- Segitiga Hollow 3 Lapis (TENGAH BOLONG TRANSPARAN BORDER SUPER TIPIS!) -->
+                    <!-- Segitiga Hollow 3 Lapis (TENGAH BOLONG TRANSPARAN BORDER SUPER TIPIS KONSISTEN!) -->
                     <div class="triangle-hollow tri-outer-black"></div>
                     <div class="triangle-hollow tri-mid-purple"></div>
                     <div class="triangle-hollow tri-inner-black"></div>
