@@ -381,15 +381,14 @@
         var paslon = data[i];
         var visiMisiHtml = paslon.visi.replace(/\n/g, '<br>');
         
-        // Render dari Base64 text langsung
         var fotoSrc = paslon.foto ? paslon.foto : `https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto`;
         
         html += '<div class="kandidat-card glass-card">';
         html += '  <div class="kandidat-info">';
         html += '    <span class="kandidat-nomor">Nomor Urut: ' + paslon.id + '</span>';
         
-        // Image tag tanpa khawatir CORS karena sumbernya lokal(base64)
-        html += '    <img src="' + fotoSrc + '" class="kandidat-img" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
+        // Atribut referrerpolicy dipertahankan agar tidak diblok jika menggunakan URL drive eksternal
+        html += '    <img src="' + fotoSrc + '" class="kandidat-img" referrerpolicy="no-referrer" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
         
         html += '    <h3 style="margin-bottom:5px;">' + paslon.nama + '</h3>';
         html += '    <div class="visi-misi-box">';
@@ -490,7 +489,7 @@
       } else {
         for(var i=0; i<data.length; i++) {
           var paslon = data[i];
-          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
+          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" referrerpolicy="no-referrer" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
           var visiSingkat = paslon.visi.length > 50 ? paslon.visi.substring(0,50) + '...' : paslon.visi;
           
           html += '<tr>';
@@ -508,7 +507,6 @@
       tbody.innerHTML = html;
     }
 
-    // --- FIX: KOMPRESI GAMBAR EKSTREM AGAR MUAT DI GOOGLE SHEETS ---
     function handleFotoUpload(event) {
       var file = event.target.files[0];
       if (!file) return;
@@ -520,7 +518,6 @@
           var canvas = document.createElement('canvas');
           var ctx = canvas.getContext('2d');
           
-          // RESOLUSI DIKECILKAN MENJADI MAX 250x250 (Dijamin muat dalam Cell Google Sheets)
           var maxWidth = 250; 
           var maxHeight = 250;
           var width = img.width;
@@ -534,7 +531,6 @@
           canvas.width = width; canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
           
-          // KOMPRESI JPG DI Kualitas 0.6 (60%)
           selectedBase64Image = canvas.toDataURL('image/jpeg', 0.6);
           
           var preview = el('k-foto-preview');
@@ -568,7 +564,7 @@
       body += '<div style="text-align:center; font-size:0.8em; color:var(--text-muted); margin-bottom:5px;">ATAU PASTE URL GAMBAR:</div>';
       
       body += '<input type="text" id="k-foto-url" class="form-control" value="'+(data.foto || '')+'" placeholder="https://..." oninput="el(\'k-foto-preview\').src=this.value; el(\'k-foto-preview\').style.display=this.value?\'inline-block\':\'none\'; selectedBase64Image=null;">';
-      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
+      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" referrerpolicy="no-referrer" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
       
       body += '<div class="form-group"><label>Visi & Misi / Proker</label>';
       body += '<textarea id="k-visi" class="form-control" placeholder="Tuliskan Visi dan Misi disini...">'+data.visi+'</textarea></div>';
