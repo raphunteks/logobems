@@ -1,7 +1,7 @@
 {
   "name": "evot-fkg-umi",
-  "version": "1.0.0",
-  "description": "Frontend E-VOT BEM FKG UMI Deployment Vercel",
+  "version": "2.0.0",
+  "description": "Frontend E-VOT BEM FKG UMI - Routing & CRUD Upgrade",
   "main": "index.html",
   "scripts": {
     "start": "serve ."
@@ -9,7 +9,7 @@
   "dependencies": {
     "serve": "^14.2.0"
   },
-  "keywords": ["evoting", "fkg-umi", "vercel"],
+  "keywords": ["evoting", "fkg-umi", "vercel", "crud"],
   "author": "Panitia KPU FKG UMI",
   "license": "MIT"
 }
