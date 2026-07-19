@@ -199,9 +199,10 @@
           <input type="text" id="aktivasi-nama-ro" class="form-control" readonly>
         </div>
         <div class="form-group">
-          <label>Nomor WhatsApp Aktif</label>
+          <label>Nomor WhatsApp</label>
+          <!-- Field WA akan diset readonly secara dinamis dari JS jika data sudah ada -->
           <input type="text" id="aktivasi-wa" class="form-control" placeholder="Contoh: 081234567890" required>
-          <small style="color:var(--text-muted); font-size:0.8em; margin-top:8px; display:block;">Nomor ini digunakan oleh Bot KPU untuk mengirimkan Token Rahasia Anda.</small>
+          <small id="aktivasi-wa-helper" style="color:var(--text-muted); font-size:0.8em; margin-top:8px; display:block;">Nomor ini digunakan oleh Bot KPU untuk mengirimkan Token Rahasia Anda.</small>
         </div>
         <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color:#000;">Daftarkan & Minta Token</button>
       </form>
@@ -336,7 +337,6 @@
       <div class="glass-card" style="margin-top: 40px;">
         <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">Manajemen Pemilih Tetap (DPT)</h3>
         
-        <!-- FITUR BARU: Tambah DPT (Single & Bulk Excel) -->
         <div style="display:flex; gap: 20px; margin-top:20px; align-items:flex-end; flex-wrap:wrap; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom:25px;">
           <div style="flex: 1; min-width:250px;">
              <label style="font-size:0.85em; color:var(--primary-blue); font-weight:bold; display:block; margin-bottom:8px;">Tambah Manual 1 Peserta</label>
@@ -405,7 +405,7 @@
     function showLoading() { el('main-loader').classList.add('active'); }
     function hideLoading() { el('main-loader').classList.remove('active'); }
 
-    // Memaksa format 628... agar sinkron 100% dari inputan website!
+    // Regex pengaman: Hanya angka, paksa format 62
     function sanitizeWA(input) {
       let wa = input.replace(/[^0-9]/g, '');
       if(wa.startsWith('0')) wa = '62' + wa.substring(1);
@@ -502,13 +502,29 @@
       showLoading();
       var res = await apiCall("cekNIMAktivasi", {nim: nim});
       hideLoading();
+      
       if(res.status === 'success') {
          el('form-aktivasi-cek').classList.add('hidden');
          el('form-aktivasi-lengkap').classList.remove('hidden');
          el('aktivasi-nim-ro').value = res.data.nim;
          el('aktivasi-nama-ro').value = res.data.nama;
+         
+         var waInput = el('aktivasi-wa');
+         var waHelper = el('aktivasi-wa-helper');
+
+         // SUPER UPGRADE: Jika WA sudah ada, kunci input (readonly) agar tidak bisa diubah orang lain
          if(res.data.wa && res.data.wa !== "-") {
-           el('aktivasi-wa').value = res.data.wa; 
+           waInput.value = res.data.wa; 
+           waInput.setAttribute('readonly', 'true');
+           waInput.style.opacity = '0.7'; 
+           waInput.style.cursor = 'not-allowed';
+           waHelper.innerHTML = "<span style='color:var(--primary-blue); font-weight:bold;'>✓ Nomor WA sudah terdaftar.</span> Token akan dikirim ulang ke nomor ini.";
+         } else {
+           waInput.value = '';
+           waInput.removeAttribute('readonly');
+           waInput.style.opacity = '1';
+           waInput.style.cursor = 'text';
+           waHelper.innerHTML = "Nomor ini digunakan oleh Bot KPU untuk mengirimkan Token Rahasia Anda.";
          }
       } else {
          showToast(res.message, 'error');
@@ -573,9 +589,11 @@
       hideLoading();
 
       if (res.status === 'success') {
+         // Token di-reset oleh backend dan bot di-trigger, tutup modal
          closeModal();
          showToast(res.message, 'success');
       } else if (res.status === 'need_wa') {
+         // NIM benar tapi belum aktivasi WA
          lupaTokenState.nim = res.data.nim;
          lupaTokenState.nama = res.data.nama;
          
