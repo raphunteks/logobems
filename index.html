@@ -53,7 +53,6 @@
     .kandidat-card { text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
     .kandidat-card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 10px 30px rgba(0, 255, 170, 0.15);}
     
-    /* FIX: Added aspect-ratio and object-fit ensure consistent image display */
     .kandidat-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--neon-green); object-fit: cover; margin: 0 auto 15px auto; box-shadow: 0 0 20px rgba(0, 255, 170, 0.2); background: #151b26;}
     
     .kandidat-info { flex-grow: 1; display: flex; flex-direction: column; }
@@ -387,8 +386,8 @@
         html += '  <div class="kandidat-info">';
         html += '    <span class="kandidat-nomor">Nomor Urut: ' + paslon.id + '</span>';
         
-        // FIX: Tambahkan referrerpolicy="no-referrer" agar tidak di blok Google
-        html += '    <img src="' + fotoSrc + '" class="kandidat-img" referrerpolicy="no-referrer" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
+        // FIX: Added crossorigin="anonymous" and referrerpolicy="no-referrer"
+        html += '    <img src="' + fotoSrc + '" class="kandidat-img" crossorigin="anonymous" referrerpolicy="no-referrer" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
         
         html += '    <h3 style="margin-bottom:5px;">' + paslon.nama + '</h3>';
         html += '    <div class="visi-misi-box">';
@@ -489,8 +488,8 @@
       } else {
         for(var i=0; i<data.length; i++) {
           var paslon = data[i];
-          // FIX: Tambahkan referrerpolicy="no-referrer" di gambar tabel admin
-          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" referrerpolicy="no-referrer" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
+          // FIX: Added crossorigin="anonymous" and referrerpolicy="no-referrer"
+          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" crossorigin="anonymous" referrerpolicy="no-referrer" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
           var visiSingkat = paslon.visi.length > 50 ? paslon.visi.substring(0,50) + '...' : paslon.visi;
           
           html += '<tr>';
@@ -508,7 +507,6 @@
       tbody.innerHTML = html;
     }
 
-    // --- FIX: KOMPRESI GAMBAR LEBIH KECIL AGAR AMAN DI GAS ---
     function handleFotoUpload(event) {
       var file = event.target.files[0];
       if (!file) return;
@@ -520,7 +518,6 @@
           var canvas = document.createElement('canvas');
           var ctx = canvas.getContext('2d');
           
-          // RESOLUSI DIKECILKAN MENJADI 300x300 AGAR LEBIH RINGAN & AMAN DARI PAYLOAD LIMIT
           var maxWidth = 300; 
           var maxHeight = 300;
           var width = img.width;
@@ -534,7 +531,6 @@
           canvas.width = width; canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
           
-          // KOMPRESI JPG DI 0.7 (70%)
           selectedBase64Image = canvas.toDataURL('image/jpeg', 0.7);
           
           var preview = el('k-foto-preview');
@@ -567,9 +563,9 @@
       body += '<input type="file" class="form-control" accept="image/*" onchange="handleFotoUpload(event)" style="margin-bottom:10px;">';
       body += '<div style="text-align:center; font-size:0.8em; color:var(--text-muted); margin-bottom:5px;">ATAU PASTE URL GAMBAR:</div>';
       
-      // FIX Preview dengan referrerpolicy
+      // FIX Preview with referrerpolicy
       body += '<input type="text" id="k-foto-url" class="form-control" value="'+(data.foto || '')+'" placeholder="https://..." oninput="el(\'k-foto-preview\').src=this.value; el(\'k-foto-preview\').style.display=this.value?\'inline-block\':\'none\'; selectedBase64Image=null;">';
-      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" referrerpolicy="no-referrer" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
+      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" crossorigin="anonymous" referrerpolicy="no-referrer" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
       
       body += '<div class="form-group"><label>Visi & Misi / Proker</label>';
       body += '<textarea id="k-visi" class="form-control" placeholder="Tuliskan Visi dan Misi disini...">'+data.visi+'</textarea></div>';
