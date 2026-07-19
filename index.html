@@ -380,7 +380,6 @@
       for (var i = 0; i < data.length; i++) {
         var paslon = data[i];
         var visiMisiHtml = paslon.visi.replace(/\n/g, '<br>');
-        
         var fotoSrc = paslon.foto ? paslon.foto : `https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto`;
         
         html += '<div class="kandidat-card glass-card">';
@@ -507,6 +506,7 @@
       tbody.innerHTML = html;
     }
 
+    // --- FIX: KOMPRESI HD (UP TO 1080px & 95% QUALITY) ---
     function handleFotoUpload(event) {
       var file = event.target.files[0];
       if (!file) return;
@@ -518,8 +518,9 @@
           var canvas = document.createElement('canvas');
           var ctx = canvas.getContext('2d');
           
-          var maxWidth = 250; 
-          var maxHeight = 250;
+          // UPGRADE: Resolusi HD (Maksimal 1080x1080)
+          var maxWidth = 1080; 
+          var maxHeight = 1080;
           var width = img.width;
           var height = img.height;
 
@@ -531,7 +532,8 @@
           canvas.width = width; canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
           
-          selectedBase64Image = canvas.toDataURL('image/jpeg', 0.6);
+          // UPGRADE: Kompresi HD dengan Kualitas 95% (Hampir Lossless)
+          selectedBase64Image = canvas.toDataURL('image/jpeg', 0.95);
           
           var preview = el('k-foto-preview');
           preview.src = selectedBase64Image;
@@ -559,9 +561,9 @@
       body += '<div class="form-group"><label>Nama Paslon</label>';
       body += '<input type="text" id="k-nama" class="form-control" value="'+data.nama+'" placeholder="Nama lengkap kandidat"></div>';
       
-      body += '<div class="form-group"><label>Foto Kandidat</label>';
+      body += '<div class="form-group"><label>Foto Kandidat (Otomatis Upload HD)</label>';
       body += '<input type="file" class="form-control" accept="image/*" onchange="handleFotoUpload(event)" style="margin-bottom:10px;">';
-      body += '<div style="text-align:center; font-size:0.8em; color:var(--text-muted); margin-bottom:5px;">ATAU PASTE URL GAMBAR:</div>';
+      body += '<div style="text-align:center; font-size:0.8em; color:var(--text-muted); margin-bottom:5px;">ATAU PASTE URL GAMBAR GOOGLE DRIVE ANDA:</div>';
       
       body += '<input type="text" id="k-foto-url" class="form-control" value="'+(data.foto || '')+'" placeholder="https://..." oninput="el(\'k-foto-preview\').src=this.value; el(\'k-foto-preview\').style.display=this.value?\'inline-block\':\'none\'; selectedBase64Image=null;">';
       body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" referrerpolicy="no-referrer" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
