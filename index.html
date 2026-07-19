@@ -1019,7 +1019,7 @@
               const json = XLSX.utils.sheet_to_json(worksheet, {header: 1}); 
               
               let payload = [];
-              for(let i=1; i<json.length; i++) { 
+              for(let i=1; i<json.length; i++) { // Mulai dari baris ke-2 (Baris 1 diabaikan sbh header)
                  let row = json[i];
                  if(row[0] && row[1]) {
                     payload.push({ nim: String(row[0]), nama: String(row[1]) });
