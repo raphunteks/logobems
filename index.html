@@ -118,7 +118,7 @@
     .status-sudah { background: rgba(0, 210, 255, 0.1); color: var(--primary-blue); border: 1px solid var(--primary-blue); }
     .status-belum { background: rgba(255, 51, 102, 0.1); color: var(--danger); border: 1px solid var(--danger); }
     
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 4, 10, 0.85); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.4s ease; padding: 20px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 4, 10, 0.85); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.4s ease; padding: 20px;}
     .modal-overlay.active { opacity: 1; visibility: visible; }
     .modal-content { max-width: 550px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; transform: scale(0.95); transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);}
     .modal-overlay.active .modal-content { transform: scale(1); }
@@ -208,7 +208,7 @@
     </div>
   </div>
 
-  <!-- 1. LOGIN SECTION (UPGRADED) -->
+  <!-- 1. LOGIN SECTION -->
   <div id="view-login" class="container hidden fade-in">
     <div class="login-wrapper glass-card">
       <img src="bemfkgumi.png" alt="Logo" class="logo-img" style="width: 80px;" onerror="this.style.display='none'">
@@ -223,8 +223,7 @@
         <div class="form-group">
           <label>Token / PIN</label>
           <input type="password" id="login-token" class="form-control" placeholder="Masukkan Token Rahasia" required>
-          
-          <!-- UPGRADE FITUR LUPA TOKEN (POPUP MODAL) -->
+          <!-- FITUR MODAL LUPA TOKEN INTERAKTIF -->
           <div style="text-align:right; margin-top:12px;">
              <a href="#" onclick="showModalLupaToken(); return false;" style="color:var(--primary-blue); font-size:0.85em; text-decoration:none; padding: 4px 8px; border: 1px solid var(--primary-blue); border-radius: 4px; transition: 0.3s; box-shadow: 0 0 5px rgba(0,210,255,0.2);" onmouseover="this.style.background='rgba(0,210,255,0.1)'" onmouseout="this.style.background='transparent'">Lupa Token? Hubungi Bot</a>
           </div>
@@ -374,7 +373,7 @@
     </div>
   </div>
 
-  <!-- MODAL GLOBAL -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="global-modal">
     <div class="glass-card modal-content">
       <div class="modal-header">
@@ -399,7 +398,7 @@
     var adminKandidatData = []; 
     var selectedBase64Image = null;
     var liveCountInterval = null; 
-    
+
     // Variabel state untuk Modal Lupa Token
     var lupaTokenState = { nim: '', nama: '' };
 
@@ -504,25 +503,31 @@
          if(res.data.wa && res.data.wa !== "-") {
            el('aktivasi-wa').value = res.data.wa; 
          }
-      } else { showToast(res.message, 'error'); }
+      } else {
+         showToast(res.message, 'error');
+      }
     }
 
     async function handleSimpanAktivasi(e) {
       e.preventDefault();
       var nim = el('aktivasi-nim-ro').value;
-      var wa = el('aktivasi-wa').value.trim();
-      if(!wa) return;
+      // Filter Frontend: Buang semua karakter selain angka agar bersih sebelum dikirim
+      var wa = el('aktivasi-wa').value.replace(/[^0-9]/g, '');
+      if(!wa) return showToast('Nomor WA tidak valid!', 'error');
+
       showLoading();
       var res = await apiCall("simpanAktivasi", {nim: nim, wa: wa});
       hideLoading();
       if(res.status === 'success') {
          showToast(res.message, 'success');
          setTimeout(() => { window.location.href = "?page=voting"; }, 2000);
-      } else { showToast(res.message, 'error'); }
+      } else {
+         showToast(res.message, 'error');
+      }
     }
 
     // ==========================================
-    // LUPA TOKEN LOGIC (BARU)
+    // LUPA TOKEN LOGIC (SUPER UPGRADE MODAL)
     // ==========================================
     function showModalLupaToken() {
       let bodyHtml = `
@@ -549,11 +554,11 @@
         <button id="btn-lupa-submit" class="btn btn-primary" onclick="handleCekLupaToken()">Cek Mahasiswa</button>
       `;
       openModal('🔄 Permintaan Lupa Token', bodyHtml, footerHtml);
-      setTimeout(() => { document.getElementById('lupa-nim-input').focus(); }, 100);
+      setTimeout(() => { el('lupa-nim-input').focus(); }, 100);
     }
 
     async function handleCekLupaToken() {
-      let nimInput = document.getElementById('lupa-nim-input').value.trim();
+      let nimInput = el('lupa-nim-input').value.trim();
       if(!nimInput) return showToast('Harap masukkan NIM', 'error');
 
       showLoading();
@@ -561,19 +566,19 @@
       hideLoading();
 
       if (res.status === 'success') {
-         // Jika berhasil dan WA sudah ada (Bot otomatis sudah kirim token)
+         // Jika WA sudah ada, GAS langsung reset dan Webhook terkirim
          closeModal();
          showToast(res.message, 'success');
       } else if (res.status === 'need_wa') {
-         // Lanjut ke Step 2 (Minta WA)
+         // Lanjut ke Step 2 (Minta input WA)
          lupaTokenState.nim = res.data.nim;
          lupaTokenState.nama = res.data.nama;
          
-         document.getElementById('step-lupa-1').classList.add('hidden');
-         document.getElementById('step-lupa-2').classList.remove('hidden');
-         document.getElementById('display-lupa-nim').innerText = res.data.nim;
+         el('step-lupa-1').classList.add('hidden');
+         el('step-lupa-2').classList.remove('hidden');
+         el('display-lupa-nim').innerText = res.data.nim;
          
-         let btnSubmit = document.getElementById('btn-lupa-submit');
+         let btnSubmit = el('btn-lupa-submit');
          btnSubmit.innerText = "Simpan & Kirim Token";
          btnSubmit.onclick = handleSimpanLupaTokenWa;
       } else {
@@ -582,7 +587,8 @@
     }
 
     async function handleSimpanLupaTokenWa() {
-      let waInput = document.getElementById('lupa-wa-input').value.trim();
+      // Filter Frontend: Buang semua karakter selain angka
+      let waInput = el('lupa-wa-input').value.replace(/[^0-9]/g, '');
       if(!waInput) return showToast('Harap masukkan Nomor WhatsApp', 'error');
 
       showLoading();
@@ -639,7 +645,6 @@
         }
         container.innerHTML = html;
         
-        // POLLING REALTIME: Panggil fungsi ini lagi 5 detik kemudian
         liveCountInterval = setTimeout(loadLiveCountData, 5000); 
 
       } else {
@@ -759,7 +764,9 @@
         showView('view-admin');
         loadAdminDashboard();
         loadAdminDPT(1);
-      } else { showToast(res.message, 'error'); }
+      } else {
+        showToast(res.message, 'error');
+      }
     }
 
     async function loadAdminDashboard() {
