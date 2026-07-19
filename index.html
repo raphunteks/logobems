@@ -254,8 +254,8 @@
   <!-- JAVASCRIPT LOGIC API FETCH (VERCEL READY) -->
   <!-- ============================================== -->
   <script>
-    // PASTIKAN MENGGANTI INI DENGAN URL DEPLOYMENT GAS ANDA YANG BARU
-    const API_URL = "https://script.google.com/macros/s/AKfycbz21jooe0MULxnVXcLQ614-cbWFyJN9oGrlxtT5tTCDKbcI0dndIhqxGx2WoCSFAw4_/exec";
+    // URL GAS TERBARU SESUAI REQUEST
+    const API_URL = "https://script.google.com/macros/s/AKfycbxw3v9--RsgQoXMRpwTvApotQZ-UmlTuH_mHpRGZIiMryxirWPSJjPcSwdtMUngcBEn/exec";
     
     var currentUser = null; 
     var currentAdminPage = 1;
@@ -380,14 +380,16 @@
       for (var i = 0; i < data.length; i++) {
         var paslon = data[i];
         var visiMisiHtml = paslon.visi.replace(/\n/g, '<br>');
+        
+        // Render dari Base64 text langsung
         var fotoSrc = paslon.foto ? paslon.foto : `https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto`;
         
         html += '<div class="kandidat-card glass-card">';
         html += '  <div class="kandidat-info">';
         html += '    <span class="kandidat-nomor">Nomor Urut: ' + paslon.id + '</span>';
         
-        // FIX: Added crossorigin="anonymous" and referrerpolicy="no-referrer"
-        html += '    <img src="' + fotoSrc + '" class="kandidat-img" crossorigin="anonymous" referrerpolicy="no-referrer" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
+        // Image tag tanpa khawatir CORS karena sumbernya lokal(base64)
+        html += '    <img src="' + fotoSrc + '" class="kandidat-img" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Foto\'">';
         
         html += '    <h3 style="margin-bottom:5px;">' + paslon.nama + '</h3>';
         html += '    <div class="visi-misi-box">';
@@ -488,8 +490,7 @@
       } else {
         for(var i=0; i<data.length; i++) {
           var paslon = data[i];
-          // FIX: Added crossorigin="anonymous" and referrerpolicy="no-referrer"
-          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" crossorigin="anonymous" referrerpolicy="no-referrer" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
+          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" style="width:50px; height:50px; border-radius:50%; object-fit:cover; background:#151b26;">' : '-';
           var visiSingkat = paslon.visi.length > 50 ? paslon.visi.substring(0,50) + '...' : paslon.visi;
           
           html += '<tr>';
@@ -507,6 +508,7 @@
       tbody.innerHTML = html;
     }
 
+    // --- FIX: KOMPRESI GAMBAR EKSTREM AGAR MUAT DI GOOGLE SHEETS ---
     function handleFotoUpload(event) {
       var file = event.target.files[0];
       if (!file) return;
@@ -518,8 +520,9 @@
           var canvas = document.createElement('canvas');
           var ctx = canvas.getContext('2d');
           
-          var maxWidth = 300; 
-          var maxHeight = 300;
+          // RESOLUSI DIKECILKAN MENJADI MAX 250x250 (Dijamin muat dalam Cell Google Sheets)
+          var maxWidth = 250; 
+          var maxHeight = 250;
           var width = img.width;
           var height = img.height;
 
@@ -531,7 +534,8 @@
           canvas.width = width; canvas.height = height;
           ctx.drawImage(img, 0, 0, width, height);
           
-          selectedBase64Image = canvas.toDataURL('image/jpeg', 0.7);
+          // KOMPRESI JPG DI Kualitas 0.6 (60%)
+          selectedBase64Image = canvas.toDataURL('image/jpeg', 0.6);
           
           var preview = el('k-foto-preview');
           preview.src = selectedBase64Image;
@@ -563,9 +567,8 @@
       body += '<input type="file" class="form-control" accept="image/*" onchange="handleFotoUpload(event)" style="margin-bottom:10px;">';
       body += '<div style="text-align:center; font-size:0.8em; color:var(--text-muted); margin-bottom:5px;">ATAU PASTE URL GAMBAR:</div>';
       
-      // FIX Preview with referrerpolicy
       body += '<input type="text" id="k-foto-url" class="form-control" value="'+(data.foto || '')+'" placeholder="https://..." oninput="el(\'k-foto-preview\').src=this.value; el(\'k-foto-preview\').style.display=this.value?\'inline-block\':\'none\'; selectedBase64Image=null;">';
-      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" crossorigin="anonymous" referrerpolicy="no-referrer" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
+      body += '<div style="text-align:center; margin-top:15px;"><img id="k-foto-preview" src="'+(data.foto || '')+'" style="width:120px; height:120px; border-radius:10px; object-fit:cover; display:'+(data.foto ? 'inline-block' : 'none')+'; border: 2px solid var(--neon-green);"></div></div>';
       
       body += '<div class="form-group"><label>Visi & Misi / Proker</label>';
       body += '<textarea id="k-visi" class="form-control" placeholder="Tuliskan Visi dan Misi disini...">'+data.visi+'</textarea></div>';
