@@ -387,7 +387,7 @@
   </div>
 
   <!-- ============================================== -->
-  <!-- JAVASCRIPT LOGIC API FETCH -->
+  <!-- JAVASCRIPT LOGIC API FETCH (VERCEL READY) -->
   <!-- ============================================== -->
   <script>
     // URL GAS ANDA
@@ -518,7 +518,7 @@
     async function handleSimpanAktivasi(e) {
       e.preventDefault();
       var nim = el('aktivasi-nim-ro').value;
-      var wa = sanitizeWA(el('aktivasi-wa').value); // Format otomatis
+      var wa = sanitizeWA(el('aktivasi-wa').value); 
       if(!wa) return showToast('Nomor WA tidak valid!', 'error');
 
       showLoading();
@@ -592,7 +592,7 @@
     }
 
     async function handleSimpanLupaTokenWa() {
-      var wa = sanitizeWA(el('lupa-wa-input').value); // Format otomatis
+      var wa = sanitizeWA(el('lupa-wa-input').value); 
       if(!wa) return showToast('Harap masukkan Nomor WhatsApp', 'error');
 
       showLoading();
