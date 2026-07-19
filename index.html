@@ -59,11 +59,12 @@
       color: white; font-size: 1em; outline: none; transition: 0.3s;
     }
     .form-control:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(0, 255, 170, 0.2); }
+    textarea.form-control { resize: vertical; min-height: 100px; }
     
     .btn {
       padding: 12px 24px; border-radius: 8px; border: none; font-weight: 600;
       cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
-      font-size: 0.9em; width: 100%; display: inline-block; text-align: center;
+      font-size: 0.9em; width: 100%; display: inline-block; text-align: center; text-decoration: none;
     }
     .btn-primary { background: var(--neon-green); color: var(--bg-dark); }
     .btn-primary:hover { background: var(--neon-green-hover); box-shadow: 0 0 15px rgba(0, 255, 170, 0.4); transform: translateY(-2px); }
@@ -75,11 +76,26 @@
 
     .login-wrapper { max-width: 400px; margin: 5vh auto; }
     
-    .kandidat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
-    .kandidat-card { text-align: center; transition: 0.3s; }
-    .kandidat-card:hover { transform: translateY(-5px); border-color: var(--neon-green); }
-    .kandidat-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--border-color); object-fit: cover; margin-bottom: 15px; }
+    /* Upgrade Kandidat Grid untuk View Langsung */
+    .kandidat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
+    .kandidat-card { text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+    .kandidat-card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 10px 30px rgba(0, 255, 170, 0.15);}
+    .kandidat-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--neon-green); object-fit: cover; margin: 0 auto 15px auto; box-shadow: 0 0 20px rgba(0, 255, 170, 0.2); }
+    .kandidat-info { flex-grow: 1; display: flex; flex-direction: column; }
+    .kandidat-nomor { background: var(--neon-green); color: var(--bg-dark); display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9em; margin-bottom: 10px; align-self: center;}
     
+    .visi-misi-box {
+      background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; 
+      font-size: 0.85em; max-height: 180px; overflow-y: auto; 
+      margin-top: 15px; border-left: 3px solid var(--neon-green); text-align: left;
+      color: #cbd5e1; line-height: 1.6;
+    }
+    
+    /* Scrollbar styling for visi-misi */
+    .visi-misi-box::-webkit-scrollbar { width: 6px; }
+    .visi-misi-box::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+    .visi-misi-box::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 4px; }
+
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
     .stat-box { text-align: center; }
     .stat-box h2 { font-size: 2.5em; margin: 10px 0; color: var(--neon-green); }
@@ -99,7 +115,7 @@
       opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .modal-overlay.active { opacity: 1; visibility: visible; }
-    .modal-content { max-width: 500px; width: 90%; position: relative; }
+    .modal-content { max-width: 500px; width: 90%; position: relative; max-height: 90vh; overflow-y: auto;}
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
     .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.5em; cursor: pointer; }
     .modal-close:hover { color: white; }
@@ -127,7 +143,7 @@
     .nav-user { display: flex; align-items: center; gap: 15px; }
     .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
     
-    .logo-img { width: 90px; height: auto; margin: 0 auto 15px auto; display: block; }
+    .logo-img { width: 100px; height: auto; margin: 0 auto 15px auto; display: block; filter: drop-shadow(0 0 10px rgba(0,255,170,0.3));}
   </style>
 </head>
 <body>
@@ -141,23 +157,31 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- ============================================== -->
-  <!-- 1. LOGIN SECTION -->
+  <!-- 0. LANDING PAGE (ROOT) -->
   <!-- ============================================== -->
-  <div id="view-login" class="container">
+  <div id="view-landing" class="container hidden" style="text-align:center; padding-top: 15vh;">
+    <img src="bemfkgumi.png" class="logo-img" alt="Logo BEM FKG UMI" onerror="this.style.display='none'">
+    <h1>SISTEM E-VOTING <span class="text-neon">BEM FKG UMI</span></h1>
+    <p class="text-muted">Selamat datang di Portal Demokrasi Digital Kedokteran Gigi. Silakan pilih jalur akses Anda.</p>
+    
+    <div style="display:flex; justify-content:center; gap: 20px; margin-top: 40px; flex-wrap: wrap;">
+      <a href="?page=voting" class="btn btn-primary" style="max-width: 280px; padding: 15px;">👤 Masuk Sebagai Pemilih</a>
+      <a href="?page=admin" class="btn btn-outline" style="max-width: 280px; padding: 15px;">⚙️ Masuk Sebagai Panitia</a>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 1. LOGIN SECTION (Directed via Route) -->
+  <!-- ============================================== -->
+  <div id="view-login" class="container hidden">
     <div class="login-wrapper glass-card">
       <!-- Menampilkan Logo -->
-      <img src="bemfkgumi.png" alt="Logo BEM FKG UMI" class="logo-img" onerror="this.style.display='none'">
-      <h2 class="text-center"><span class="text-neon">E-VOT BEM FKG UMI</span></h2>
-      <p class="text-center text-muted" style="margin-bottom: 25px;">Portal Demokrasi Digital Kedokteran Gigi</p>
+      <img src="bemfkgumi.png" alt="Logo BEM FKG UMI" class="logo-img" style="width: 80px;" onerror="this.style.display='none'">
+      <h2 class="text-center"><span class="text-neon">AUTENTIKASI</span></h2>
+      <p class="text-center text-muted" style="margin-bottom: 25px;" id="login-subtitle">Silakan login untuk melanjutkan</p>
       
-      <!-- Tab Nav -->
-      <div style="display:flex; margin-bottom: 20px; border-bottom: 1px solid var(--border-color);">
-        <button class="btn btn-outline" id="tab-pemilih" style="border-radius: 8px 8px 0 0; border-bottom:none; flex:1;" onclick="switchLoginTab('pemilih')">Pemilih</button>
-        <button class="btn btn-outline" id="tab-admin" style="border-radius: 8px 8px 0 0; border-bottom:none; flex:1; opacity:0.5; border-color:transparent;" onclick="switchLoginTab('admin')">Panitia</button>
-      </div>
-
       <!-- Form Pemilih -->
-      <form id="form-login-pemilih" onsubmit="handleLoginPemilih(event)">
+      <form id="form-login-pemilih" onsubmit="handleLoginPemilih(event)" class="hidden">
         <div class="form-group">
           <label>NIM Mahasiswa</label>
           <input type="text" id="login-nim" class="form-control" placeholder="Contoh: 162021001" required>
@@ -167,21 +191,23 @@
           <input type="password" id="login-token" class="form-control" placeholder="Masukkan Token Rahasia" required>
         </div>
         <button type="submit" class="btn btn-primary">Masuk & Pilih</button>
+        <div class="text-center" style="margin-top:15px;"><a href="?" style="color:var(--text-muted); font-size:0.8em; text-decoration:none;">« Kembali ke Menu Utama</a></div>
       </form>
 
       <!-- Form Admin -->
-      <form id="form-login-admin" class="hidden" onsubmit="handleLoginAdmin(event)">
+      <form id="form-login-admin" onsubmit="handleLoginAdmin(event)" class="hidden">
         <div class="form-group">
           <label>PIN Akses Panitia</label>
           <input type="password" id="login-pin-admin" class="form-control" placeholder="Masukkan PIN Admin" required>
         </div>
         <button type="submit" class="btn btn-outline">Akses Dashboard</button>
+        <div class="text-center" style="margin-top:15px;"><a href="?" style="color:var(--text-muted); font-size:0.8em; text-decoration:none;">« Kembali ke Menu Utama</a></div>
       </form>
     </div>
   </div>
 
   <!-- ============================================== -->
-  <!-- 2. PEMILIH DASHBOARD -->
+  <!-- 2. PEMILIH DASHBOARD (VOTING LANGSUNG) -->
   <!-- ============================================== -->
   <div id="view-pemilih" class="hidden">
     <div class="navbar">
@@ -190,16 +216,19 @@
         <h3>Halo, <span class="text-neon" id="user-nama-display">Nama Mhs</span></h3>
       </div>
       <div class="nav-user">
-        <span class="text-muted" id="user-nim-display">NIM</span>
+        <span class="text-muted" id="user-nim-display" style="display:none;">NIM</span> <!-- disembunyikan agar bersih, tp datanya ada -->
         <button class="btn btn-outline btn-small" onclick="handleLogout()">Keluar</button>
       </div>
     </div>
     <div class="container">
       <div class="text-center" style="margin-bottom: 30px;">
-        <h2>Daftar <span class="text-neon">Kandidat</span></h2>
-        <p class="text-muted">Pilih pemimpin BEM FKG UMI terbaik untuk masa depan. 1 Suara sangat berarti.</p>
+        <h2>Daftar <span class="text-neon">Kandidat Pemimpin</span></h2>
+        <p class="text-muted">Pelajari Visi & Misi di bawah ini. Satu suara Anda menentukan arah gerak BEM FKG UMI.</p>
       </div>
+      
+      <!-- Container Kartu Kandidat Full Info -->
       <div class="kandidat-grid" id="kandidat-container"></div>
+      
     </div>
   </div>
 
@@ -238,6 +267,21 @@
       <h3 style="margin-top: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Live Quick Count</h3>
       <div class="kandidat-grid" id="admin-kandidat-container" style="margin-top: 20px;"></div>
 
+      <!-- NEW: Manajemen Kandidat (CRUD) -->
+      <h3 style="margin-top: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Manajemen Kandidat</h3>
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary btn-small" onclick="showModalKandidat()">+ Tambah Kandidat Baru</button>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>No Urut/ID</th><th>Foto</th><th>Nama Paslon</th><th>Visi & Misi</th><th>Aksi</th></tr>
+          </thead>
+          <tbody id="table-kandidat-admin-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Manajemen DPT -->
       <h3 style="margin-top: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">Data Pemilih Tetap (DPT)</h3>
       <div style="display:flex; justify-content:space-between; margin-top:20px; gap: 15px;">
         <input type="text" id="admin-search-dpt" class="form-control" placeholder="Cari NIM atau Nama..." onkeyup="searchDPT()" style="max-width: 300px;">
@@ -273,12 +317,13 @@
   <!-- JAVASCRIPT LOGIC API FETCH (VERCEL READY) -->
   <!-- ============================================== -->
   <script>
-    // URL API Backend Google Apps Script Anda (Ubah jika deploy URL GAS baru)
+    // GANTI DENGAN URL GAS ANDA YANG BARU DI-DEPLOY SETELAH MERUBAH CODE.GS DI BAWAH INI
     const API_URL = "https://script.google.com/macros/s/AKfycbz21jooe0MULxnVXcLQ614-cbWFyJN9oGrlxtT5tTCDKbcI0dndIhqxGx2WoCSFAw4_/exec";
     
     var currentUser = null; 
     var currentAdminPage = 1;
     var rawKandidatData = []; 
+    var adminKandidatData = []; // Untuk manajemen CRUD admin
 
     function el(id) { return document.getElementById(id); }
     function showLoading() { el('main-loader').classList.add('active'); }
@@ -306,34 +351,41 @@
     function closeModal() { el('global-modal').classList.remove('active'); }
 
     function showView(viewId) {
+      el('view-landing').classList.add('hidden');
       el('view-login').classList.add('hidden');
       el('view-pemilih').classList.add('hidden');
       el('view-admin').classList.add('hidden');
       el(viewId).classList.remove('hidden');
     }
 
-    function switchLoginTab(type) {
-      var btnPemilih = el('tab-pemilih');
-      var btnAdmin = el('tab-admin');
-      var formPemilih = el('form-login-pemilih');
-      var formAdmin = el('form-login-admin');
+    // --- ROUTER & NAVIGATION ---
+    function initRouter() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const page = urlParams.get('page');
 
-      if (type === 'pemilih') {
-        btnPemilih.style.opacity = '1'; btnPemilih.style.borderColor = 'var(--neon-green)';
-        btnAdmin.style.opacity = '0.5'; btnAdmin.style.borderColor = 'transparent';
-        formPemilih.classList.remove('hidden'); formAdmin.classList.add('hidden');
+      if (page === 'admin') {
+        showView('view-login');
+        el('form-login-pemilih').classList.add('hidden');
+        el('form-login-admin').classList.remove('hidden');
+        el('login-subtitle').innerText = "Portal khusus Panitia Pemilihan (KPU)";
+      } else if (page === 'voting') {
+        showView('view-login');
+        el('form-login-admin').classList.add('hidden');
+        el('form-login-pemilih').classList.remove('hidden');
+        el('login-subtitle').innerText = "Gunakan NIM dan Token Anda untuk Memilih";
       } else {
-        btnAdmin.style.opacity = '1'; btnAdmin.style.borderColor = 'var(--neon-green)';
-        btnPemilih.style.opacity = '0.5'; btnPemilih.style.borderColor = 'transparent';
-        formAdmin.classList.remove('hidden'); formPemilih.classList.add('hidden');
+        // Jika tidak ada routing, tampilkan Landing Page
+        showView('view-landing');
       }
     }
+    window.addEventListener('DOMContentLoaded', initRouter);
 
     function handleLogout() {
       currentUser = null;
-      showView('view-login');
       el('login-nim').value = ''; el('login-token').value = ''; el('login-pin-admin').value = '';
       showToast('Berhasil keluar sistem.', 'success');
+      // Redirect kembali ke landing page murni
+      window.location.href = "?";
     }
 
     // --- FETCH API FUNCTION ---
@@ -350,7 +402,9 @@
       }
     }
 
-    // --- LOGIC PEMILIH ---
+    // ==========================================
+    // LOGIC PEMILIH (VOTING)
+    // ==========================================
     async function handleLoginPemilih(e) {
       e.preventDefault();
       var nim = el('login-nim').value.trim();
@@ -386,36 +440,45 @@
       }
     }
 
+    // TAMPILAN FULL KANDIDAT LANGSUNG
     function renderKandidatGrid(data) {
       var container = el('kandidat-container');
       var html = '';
       for (var i = 0; i < data.length; i++) {
         var paslon = data[i];
+        // Konversi newline teks VisiMisi ke tag <br>
+        var visiMisiHtml = paslon.visi.replace(/\n/g, '<br>');
+        var fotoSrc = paslon.foto ? paslon.foto : `https://via.placeholder.com/300x300/151b26/00ffaa?text=Kandidat+${i+1}`;
+        
         html += '<div class="kandidat-card glass-card">';
-        html += '<img src="https://via.placeholder.com/300x300/151b26/00ffaa?text=Paslon+' + (i+1) + '" class="kandidat-img" alt="Foto Paslon">';
-        html += '<h3>' + paslon.nama + '</h3>';
-        html += '<div style="display:flex; gap:10px; margin-top:20px;">';
-        html += '<button class="btn btn-outline btn-small" onclick="lihatVisiMisi(\'' + paslon.id + '\')">Profil</button>';
-        html += '<button class="btn btn-primary btn-small" onclick="konfirmasiVote(\'' + paslon.id + '\', \'' + paslon.nama + '\')">PILIH</button>';
-        html += '</div></div>';
+        html += '  <div class="kandidat-info">';
+        html += '    <span class="kandidat-nomor">Nomor Urut: ' + paslon.id + '</span>';
+        html += '    <img src="' + fotoSrc + '" class="kandidat-img" alt="Foto Paslon" onerror="this.src=\'https://via.placeholder.com/300x300/151b26/00ffaa?text=No+Image\'">';
+        html += '    <h3 style="margin-bottom:5px;">' + paslon.nama + '</h3>';
+        html += '    <div class="visi-misi-box">';
+        html += '      <strong>Visi & Misi:</strong><br>' + visiMisiHtml;
+        html += '    </div>';
+        html += '  </div>';
+        html += '  <div style="margin-top:20px;">';
+        html += '    <button class="btn btn-primary" style="width:100%; padding:15px; font-size:1.1em;" onclick="konfirmasiVote(\'' + paslon.id + '\', \'' + paslon.nama + '\')">KOTAK SUARA: PILIH PASLON INI</button>';
+        html += '  </div>';
+        html += '</div>';
       }
       container.innerHTML = html;
     }
 
-    function lihatVisiMisi(id) {
-      var paslon = rawKandidatData.find(p => p.id === id);
-      if (!paslon) return;
-      var body = '<p style="color:var(--text-muted); margin-bottom:10px;">Visi, Misi & Proker:</p><p>' + paslon.visi + '</p>';
-      var footer = '<button class="btn btn-outline" onclick="closeModal()">Tutup</button>';
-      openModal('Profil: ' + paslon.nama, body, footer);
-    }
-
     function konfirmasiVote(id, nama) {
-      var body = '<p>Apakah Anda yakin akan memberikan suara untuk <strong>' + nama + '</strong>?</p>';
-      body += '<p style="color:#ff4757; font-size:0.9em; margin-top:15px;">Peringatan: Pilihan tidak dapat diubah setelah disubmit.</p>';
-      var footer = '<button class="btn btn-outline" onclick="closeModal()">Batal</button>';
-      footer += '<button class="btn btn-primary" onclick="eksekusiVote(\'' + id + '\')">Ya, Saya Yakin</button>';
-      openModal('Konfirmasi Pilihan', body, footer);
+      var body = '<div style="text-align:center;">';
+      body += '<p style="font-size:1.2em; color:white; margin-bottom:15px;">Anda akan memberikan suara untuk:</p>';
+      body += '<h2 style="color:var(--neon-green); margin-bottom: 15px;">' + nama + ' (No. ' + id + ')</h2>';
+      body += '<div style="background:rgba(255, 71, 87, 0.1); border-left: 4px solid #ff4757; padding:15px; text-align:left;">';
+      body += '<strong>PERHATIAN!</strong><br><span style="color:#ff4757;">Pilihan yang Anda buat bersifat RAHASIA dan FINAL (Tidak dapat dibatalkan atau diubah).</span><br>Pastikan Anda telah membaca dan memahami Visi & Misi kandidat dengan saksama.';
+      body += '</div></div>';
+      
+      var footer = '<button class="btn btn-outline" onclick="closeModal()">Kembali Membaca</button>';
+      footer += '<button class="btn btn-primary" onclick="eksekusiVote(\'' + id + '\')">Ya, Saya Yakin Pilih Ini</button>';
+      
+      openModal('KONFIRMASI FINAL', body, footer);
     }
 
     async function eksekusiVote(id) {
@@ -437,12 +500,14 @@
       body += '<h3>Suara Berhasil Direkam!</h3>';
       body += '<p style="color:var(--text-muted); margin: 15px 0;">ID Transaksi Digital Anda:</p>';
       body += '<div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:5px; font-family:monospace; font-size:1.2em; color:var(--neon-green); border:1px dashed var(--neon-green);">' + idVote + '</div>';
-      body += '<p style="font-size:0.8em; margin-top:15px;">Silakan screenshot layar ini sebagai bukti partisipasi Anda untuk BEM FKG UMI.</p></div>';
+      body += '<p style="font-size:0.8em; margin-top:15px;">Silakan screenshot layar ini sebagai bukti sah partisipasi Anda dalam Pemilihan BEM FKG UMI.</p></div>';
       var footer = '<button class="btn btn-primary" onclick="handleLogout()">Selesai & Keluar</button>';
       openModal('Bukti Voting', body, footer);
     }
 
-    // --- LOGIC ADMIN ---
+    // ==========================================
+    // LOGIC ADMIN & CRUD
+    // ==========================================
     async function handleLoginAdmin(e) {
       e.preventDefault();
       var pin = el('login-pin-admin').value.trim();
@@ -470,7 +535,10 @@
         var btnStatus = el('btn-toggle-status');
         btnStatus.innerText = res.status_voting + ' (Ubah)';
         btnStatus.className = 'btn btn-small ' + (res.status_voting === 'OPEN' ? 'btn-primary' : 'btn-danger');
-        renderAdminKandidat(res.kandidat);
+        
+        adminKandidatData = res.kandidat; // Simpan untuk CRUD
+        renderAdminKandidat(res.kandidat); // Render Quick count
+        renderAdminKandidatTable(res.kandidat); // Render Table CRUD
       }
     }
     
@@ -479,12 +547,116 @@
       var html = '';
       for (var i = 0; i < data.length; i++) {
          html += '<div class="glass-card stat-box" style="padding:15px;">';
-         html += '<h4 style="color:var(--text-muted);">' + data[i].nama + '</h4>';
+         html += '<h4 style="color:var(--text-muted);">' + data[i].nama + ' ('+data[i].id+')</h4>';
          html += '<h2>' + data[i].suara + ' Suara</h2></div>';
       }
       container.innerHTML = html;
     }
 
+    // --- FITUR CRUD KANDIDAT ---
+    function renderAdminKandidatTable(data) {
+      var tbody = el('table-kandidat-admin-body');
+      var html = '';
+      if(data.length === 0) {
+        html = '<tr><td colspan="5" class="text-center text-muted">Belum ada data kandidat.</td></tr>';
+      } else {
+        for(var i=0; i<data.length; i++) {
+          var paslon = data[i];
+          var fotoHtml = paslon.foto ? '<img src="'+paslon.foto+'" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">' : '-';
+          var visiSingkat = paslon.visi.length > 50 ? paslon.visi.substring(0,50) + '...' : paslon.visi;
+          
+          html += '<tr>';
+          html += '<td>' + paslon.id + '</td>';
+          html += '<td>' + fotoHtml + '</td>';
+          html += '<td>' + paslon.nama + '</td>';
+          html += '<td>' + visiSingkat + '</td>';
+          html += '<td>';
+          html += '  <button class="btn btn-outline btn-small" onclick="showModalKandidat(\''+paslon.id+'\')" style="margin-right:5px; padding: 4px 8px;">Edit</button>';
+          html += '  <button class="btn btn-danger btn-small" onclick="konfirmasiHapusKandidat(\''+paslon.id+'\', \''+paslon.nama+'\')" style="padding: 4px 8px;">Hapus</button>';
+          html += '</td>';
+          html += '</tr>';
+        }
+      }
+      tbody.innerHTML = html;
+    }
+
+    function showModalKandidat(idEdit = null) {
+      var mode = idEdit ? 'Edit' : 'Tambah';
+      var data = { id: '', nama: '', visi: '', foto: '' };
+      
+      if (idEdit) {
+        var obj = adminKandidatData.find(k => k.id === idEdit);
+        if(obj) data = obj;
+      }
+
+      var body = '<div class="form-group"><label>Nomor Urut / ID Kandidat</label>';
+      body += '<input type="text" id="k-id" class="form-control" value="'+data.id+'" placeholder="Contoh: 01 atau PAS-01"></div>';
+      
+      body += '<div class="form-group"><label>Nama Paslon</label>';
+      body += '<input type="text" id="k-nama" class="form-control" value="'+data.nama+'" placeholder="Nama lengkap kandidat"></div>';
+      
+      body += '<div class="form-group"><label>Link URL Foto (Opsional)</label>';
+      body += '<input type="text" id="k-foto" class="form-control" value="'+(data.foto || '')+'" placeholder="https://link-gambar-anda.com/foto.jpg"></div>';
+      
+      body += '<div class="form-group"><label>Visi & Misi / Proker</label>';
+      body += '<textarea id="k-visi" class="form-control" placeholder="Tuliskan Visi dan Misi disini...">'+data.visi+'</textarea></div>';
+      
+      var footer = '<button class="btn btn-outline" onclick="closeModal()">Batal</button>';
+      footer += '<button class="btn btn-primary" onclick="simpanKandidat(\''+(idEdit || '')+'\')">Simpan Data</button>';
+      
+      openModal(mode + ' Kandidat', body, footer);
+    }
+
+    async function simpanKandidat(oldId) {
+      var reqData = {
+        oldId: oldId,
+        id: el('k-id').value.trim(),
+        nama: el('k-nama').value.trim(),
+        foto: el('k-foto').value.trim(),
+        visi: el('k-visi').value.trim()
+      };
+
+      if (!reqData.id || !reqData.nama || !reqData.visi) {
+        showToast('ID, Nama, dan Visi Misi wajib diisi!', 'error');
+        return;
+      }
+
+      var action = oldId ? "updateKandidat" : "addKandidat";
+      
+      closeModal();
+      showLoading();
+      var res = await apiCall(action, reqData);
+      hideLoading();
+
+      if(res.status === 'success') {
+        showToast(res.message, 'success');
+        loadAdminDashboard(); // Refresh seluruh dashboard admin
+      } else {
+        showToast(res.message, 'error');
+      }
+    }
+
+    function konfirmasiHapusKandidat(id, nama) {
+      var body = '<p>Anda yakin ingin menghapus kandidat <strong>' + nama + '</strong>?</p><p style="color:#ff4757;">Semua suara untuk kandidat ini akan tetap ada di Log, namun kandidat tidak akan muncul lagi.</p>';
+      var footer = '<button class="btn btn-outline" onclick="closeModal()">Batal</button>';
+      footer += '<button class="btn btn-danger" onclick="eksekusiHapusKandidat(\''+id+'\')">Ya, Hapus!</button>';
+      openModal('Hapus Kandidat', body, footer);
+    }
+
+    async function eksekusiHapusKandidat(id) {
+      closeModal();
+      showLoading();
+      var res = await apiCall("deleteKandidat", { id: id });
+      hideLoading();
+      if(res.status === 'success') {
+        showToast(res.message, 'success');
+        loadAdminDashboard();
+      } else {
+        showToast(res.message, 'error');
+      }
+    }
+
+    // --- OTHER ADMIN FUNCTIONS ---
     async function toggleVotingStatus() {
       var btn = el('btn-toggle-status');
       var currentStr = btn.innerText;
